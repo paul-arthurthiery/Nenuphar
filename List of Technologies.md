@@ -2,7 +2,6 @@
 1.**Reactjs** for dynamical web pages (our site is close to a webapp)
 2.**Chartjs** to get pretty Charts
 3.**Bootstrap** framework to easily implement responsive design 
-4. **CSS3, HTML5 & JS** used throughout the project 
 
 #Back :#
 1.**Spring** (because )
