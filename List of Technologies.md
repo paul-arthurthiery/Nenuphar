@@ -3,6 +3,7 @@
 2.**Chartjs** to get pretty Charts
 3.**Bootstrap** framework to easily implement responsive design 
 4. **SheetJS** to parse datasheets
+5. **MaterialUI** for premade React components implementing Material Design
 
 #Back :
 1.**Spring** (because )
