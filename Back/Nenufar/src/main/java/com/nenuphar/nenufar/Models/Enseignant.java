@@ -11,6 +11,7 @@ public class Enseignant
     private String matiere;
     private boolean istuteur;
     private boolean isrespoapp;
+    private boolean isadmin;
 
     public Enseignant()
     {
@@ -105,5 +106,15 @@ public class Enseignant
     public void setIsrespoapp(boolean isrespoapp)
     {
         this.isrespoapp = isrespoapp;
+    }
+
+    public boolean isIsadmin()
+    {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin)
+    {
+        this.isadmin = isadmin;
     }
 }
