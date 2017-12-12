@@ -1,15 +1,15 @@
 package com.nenuphar.nenufar.Models;
 
-public class Eleve
+public class User
 {
     private int id; //Numero eleve
     private String name;
-    private String last_name;
+    private String lastName;
     private String email;
     private String login;
     private String password;
 
-    public Eleve()
+    public User()
     {
 
     }
@@ -34,14 +34,14 @@ public class Eleve
         this.name = name;
     }
 
-    public String getLast_name()
+    public String getLastName()
     {
-        return last_name;
+        return lastName;
     }
 
-    public void setLast_name(String last_name)
+    public void setLastName(String lastName)
     {
-        this.last_name = last_name;
+        this.lastName = lastName;
     }
 
     public String getEmail()

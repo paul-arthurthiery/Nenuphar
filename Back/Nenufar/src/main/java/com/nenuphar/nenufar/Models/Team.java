@@ -1,12 +1,12 @@
 package com.nenuphar.nenufar.Models;
 
-public class Equipe
+public class Team
 {
     private int id;
-    private int taille;
+    private int size;
     private String name;
 
-    public Equipe()
+    public Team()
     {
 
     }
@@ -21,14 +21,14 @@ public class Equipe
         this.id = id;
     }
 
-    public int getTaille()
+    public int getSize()
     {
-        return taille;
+        return size;
     }
 
-    public void setTaille(int taille)
+    public void setSize(int size)
     {
-        this.taille = taille;
+        this.size = size;
     }
 
     public String getName()

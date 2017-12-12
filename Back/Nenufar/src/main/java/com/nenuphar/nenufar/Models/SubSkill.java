@@ -1,12 +1,12 @@
 package com.nenuphar.nenufar.Models;
 
-public class Sous_competence
+public class SubSkill
 {
     private int id;
     private String nom;
-    private int niveau;
+    private int grade;
 
-    public Sous_competence()
+    public SubSkill()
     {
 
     }
@@ -31,14 +31,14 @@ public class Sous_competence
         this.nom = nom;
     }
 
-    public int getNiveau()
+    public int getGrade()
     {
-        return niveau;
+        return grade;
     }
 
-    public void setNiveau(int niveau)
+    public void setGrade(int grade)
     {
-        this.niveau = niveau;
+        this.grade = grade;
     }
 
 }

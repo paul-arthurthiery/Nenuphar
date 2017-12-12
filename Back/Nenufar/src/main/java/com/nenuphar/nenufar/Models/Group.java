@@ -1,12 +1,12 @@
 package com.nenuphar.nenufar.Models;
 
-public class Groupe
+public class Group
 {
     private int id;
     private String name;
-    private int taille;
+    private int Size;
 
-    public Groupe()
+    public Group()
     {
 
     }
@@ -31,13 +31,13 @@ public class Groupe
         this.name = name;
     }
 
-    public int getTaille()
+    public int getSize()
     {
-        return taille;
+        return Size;
     }
 
-    public void setTaille(int taille)
+    public void setSize(int size)
     {
-        this.taille = taille;
+        this.Size = size;
     }
 }
