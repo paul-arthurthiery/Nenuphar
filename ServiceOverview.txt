@@ -1,0 +1,20 @@
+Cluster                |     Controller         |           Service
+----------------------------------------------------------------------------------------
+Login + MdpReset       |     LoginController    |         authEnseignant + authÉlève + resetPw
+
+Administrateur         |      AdminController   |		  promotionService
+
+Tuteur                 |       TuteurCtrl       |         groupeService + notifService + searchBarService + respoAPPService + ficheService
+
+RespoAPP               |       RespoAPPCtrl     |         respoAPPService
+
+Élève                  |       Élève            |          ficheService + notifService + 
+
+
+
+
+
+
+
+
+
