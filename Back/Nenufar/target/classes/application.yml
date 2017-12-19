@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:8889/Nenuphar?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/Nenuphar?createDatabaseIfNotExist=true&useSSL=false
     username: root
-    password: root
+    password:
+
+server:
+  port: 8000
 
 # Show or not log for each sql query
 spring.jpa.show-sql: true
 
 # Hibernate ddl auto (create, create-drop, update)
 spring.jpa.hibernate.ddl-auto: update
-
