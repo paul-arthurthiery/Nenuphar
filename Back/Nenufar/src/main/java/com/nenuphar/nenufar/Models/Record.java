@@ -1,10 +1,19 @@
 package com.nenuphar.nenufar.Models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name="Record")
 public class Record
 {
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
+
     private int nbrCourses;
     private Date deadlines;
 
@@ -13,12 +22,12 @@ public class Record
 
     }
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }

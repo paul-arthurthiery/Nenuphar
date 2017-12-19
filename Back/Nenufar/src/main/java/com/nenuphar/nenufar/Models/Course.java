@@ -1,8 +1,18 @@
 package com.nenuphar.nenufar.Models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Course")
 public class Course
 {
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
+
     private String name;
     private int nbrSkills;
 
@@ -11,12 +21,12 @@ public class Course
 
     }
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }

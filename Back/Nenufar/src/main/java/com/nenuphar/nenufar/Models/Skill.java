@@ -1,8 +1,18 @@
 package com.nenuphar.nenufar.Models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Skill")
 public class Skill
 {
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
+
     private String name;
     private int nbrSubSkills;
     private int recommendedWeek; //Semaine recommmandée
@@ -13,12 +23,12 @@ public class Skill
 
     }
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }
