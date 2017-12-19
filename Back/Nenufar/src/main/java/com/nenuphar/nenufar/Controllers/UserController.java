@@ -21,7 +21,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public User postIndex(@RequestBody User user){
-        return userService.getPostedUser(user);
+    public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent){
+        User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
+        if(user==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 }
