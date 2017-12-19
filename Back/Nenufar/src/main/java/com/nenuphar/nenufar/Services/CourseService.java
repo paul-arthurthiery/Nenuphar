@@ -14,4 +14,11 @@ public class CourseService {
     public Course getCourse(Long id){ return courseRepository.findOne(id);}
 
     public Course getPostedCourse(Course course){ return course;}
+
+    public Course createCourse(long id, String name, int nbrSkills)
+    {
+        Course course = new Course(id, name, nbrSkills);
+        courseRepository.save(course);
+        return course;
+    }
 }

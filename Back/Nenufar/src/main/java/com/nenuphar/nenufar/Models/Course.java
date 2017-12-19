@@ -9,13 +9,14 @@ public class Course
     @Id
     @GeneratedValue
     private long id;
-
     private String name;
     private int nbrSkills;
 
-    public Course()
+    public Course(long id, String name, int nbrSkills)
     {
-
+        this.id = id;
+        this.name = name;
+        this.nbrSkills = nbrSkills;
     }
 
     public long getId()
