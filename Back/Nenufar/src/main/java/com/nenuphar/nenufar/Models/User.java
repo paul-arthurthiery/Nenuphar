@@ -18,10 +18,26 @@ public class User
     private String email;
     private String login;
     private String password;
+    private boolean isRespoAPP;
+    private boolean isAdmin;
+    private boolean isTutor;
+    private boolean isStudent;
 
     public User()
     {
 
+    }
+
+    public User(String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.isRespoAPP = isRespoAPP;
+        this.isAdmin = isAdmin;
+        this.isTutor = isTutor;
+        this.isStudent = isStudent;
     }
 
     public long getId()
@@ -82,5 +98,37 @@ public class User
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public boolean isRespoAPP() {
+        return isRespoAPP;
+    }
+
+    public void setRespoAPP(boolean respoAPP) {
+        isRespoAPP = respoAPP;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isTutor() {
+        return isTutor;
+    }
+
+    public void setTutor(boolean tutor) {
+        isTutor = tutor;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 }
