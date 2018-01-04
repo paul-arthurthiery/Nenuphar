@@ -1,6 +1,8 @@
 package com.nenuphar.nenufar.Models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -129,4 +131,16 @@ public class User
     public void setStudent(boolean student) {
         isStudent = student;
     }
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Record> records = new HashSet<>();
+
+    public Set<Record> getRecords() {
+        return records;
+    }
+
+    public void setRecords(Set<Record> records) {
+        this.records = records;
+    }
+// standard constructors/getters/setters
 }

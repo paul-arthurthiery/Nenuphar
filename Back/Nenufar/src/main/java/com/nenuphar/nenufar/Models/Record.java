@@ -3,6 +3,8 @@ package com.nenuphar.nenufar.Models;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Record")
@@ -18,6 +20,9 @@ public class Record
     @ManyToOne
     @JoinColumn(name = "course_ID")
     private Course courseID;
+
+
+
 
     public Record()
     {
@@ -68,4 +73,19 @@ public class Record
         this.courseID = courseID;
     }
 
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Record_User",
+            joinColumns = { @JoinColumn(name = "record_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    Set<User> users = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }
