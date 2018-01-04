@@ -19,6 +19,12 @@ public class Team
 
     }
 
+    public Team(int size, String name)
+    {
+        this.size = size;
+        this.name = name;
+    }
+
     public long getId()
     {
         return id;

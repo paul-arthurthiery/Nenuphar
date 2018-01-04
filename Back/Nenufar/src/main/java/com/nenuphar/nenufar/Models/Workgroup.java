@@ -19,6 +19,12 @@ public class Workgroup
 
     }
 
+    public Workgroup(String name, int size)
+    {
+        this.name = name;
+        Size = size;
+    }
+
     public long getId()
     {
         return id;
