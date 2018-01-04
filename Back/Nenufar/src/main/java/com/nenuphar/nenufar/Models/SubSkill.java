@@ -11,12 +11,18 @@ public class SubSkill
     @GeneratedValue
     private long id;
 
-    private String nom;
+    private String name;
     private int grade;
 
     public SubSkill()
     {
 
+    }
+
+    public SubSkill(String name, int grade)
+    {
+        this.name = name;
+        this.grade = grade;
     }
 
     public long getId()
@@ -29,14 +35,14 @@ public class SubSkill
         this.id = id;
     }
 
-    public String getNom()
+    public String getName()
     {
-        return nom;
+        return name;
     }
 
-    public void setNom(String nom)
+    public void setName(String name)
     {
-        this.nom = nom;
+        this.name = name;
     }
 
     public int getGrade()

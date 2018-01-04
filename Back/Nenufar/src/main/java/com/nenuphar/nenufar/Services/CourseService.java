@@ -15,9 +15,9 @@ public class CourseService {
 
     public Course getPostedCourse(Course course){ return course;}
 
-    public Course createCourse(long id, String name, int nbrSkills)
+    public Course createCourse(String name, int nbrSkills)
     {
-        Course course = new Course(id, name, nbrSkills);
+        Course course = new Course(name, nbrSkills);
         courseRepository.save(course);
         return course;
     }

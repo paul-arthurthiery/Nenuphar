@@ -21,6 +21,13 @@ public class Skill
 
     }
 
+    public Skill(String name, int nbrSkills, int recommendedWeek)
+    {
+        this.name = name;
+        this.nbrSubSkills = nbrSkills;
+        this. recommendedWeek = recommendedWeek;
+    }
+
     public long getId()
     {
         return id;

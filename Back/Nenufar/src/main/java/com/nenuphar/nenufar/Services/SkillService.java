@@ -14,4 +14,11 @@ public class SkillService {
     public Skill getSkill(Long id){ return skillRepository.findOne(id);}
 
     public Skill getPostedSkill(Skill skill){ return skill;}
+
+    public Skill createSkill(String name, int nbrSkills, int recommendedWeek)
+    {
+        Skill skill = new Skill(name, nbrSkills, recommendedWeek);
+        skillRepository.save(skill);
+        return skill;
+    }
 }

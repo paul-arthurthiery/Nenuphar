@@ -12,9 +12,13 @@ public class Course
     private String name;
     private int nbrSkills;
 
-    public Course(long id, String name, int nbrSkills)
+    public Course()
     {
-        this.id = id;
+
+    }
+
+    public Course(String name, int nbrSkills)
+    {
         this.name = name;
         this.nbrSkills = nbrSkills;
     }

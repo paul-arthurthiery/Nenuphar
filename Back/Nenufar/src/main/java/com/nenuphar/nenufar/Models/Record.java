@@ -20,6 +20,12 @@ public class Record
 
     }
 
+    public Record(int nbrCourses, Date deadlines)
+    {
+        this.nbrCourses = nbrCourses;
+        this.deadlines = deadlines;
+    }
+
     public long getId()
     {
         return id;
