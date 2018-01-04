@@ -14,4 +14,11 @@ public class TeamService {
     public Team getTeam(Long id){ return teamRepository.findOne(id); }
 
     public Team getPostedTeam(Team team){ return team;}
+
+    public Team createTeam(int size, String name)
+    {
+        Team team = new Team(size, name);
+        teamRepository.save(team);
+        return team;
+    }
 }
