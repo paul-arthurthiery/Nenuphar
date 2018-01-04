@@ -14,6 +14,10 @@ public class SubSkill
     private String name;
     private int grade;
 
+    @ManyToOne
+    @JoinColumn(name = "skill_ID")
+    private Skill skillID;
+
     public SubSkill()
     {
 
@@ -55,4 +59,11 @@ public class SubSkill
         this.grade = grade;
     }
 
+    public Skill getSkillID() {
+        return skillID;
+    }
+
+    public void setSkillID(Skill skillID) {
+        this.skillID = skillID;
+    }
 }

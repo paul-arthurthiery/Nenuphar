@@ -1,6 +1,7 @@
 package com.nenuphar.nenufar.Models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -13,7 +14,12 @@ public class Skill
 
     private String name;
     private int nbrSubSkills;
-    private int recommendedWeek; //Semaine recommmandée
+    private Date recommendedWeek; //Semaine recommmandée
+
+    @ManyToOne
+    @JoinColumn(name = "course_ID")
+    private Course courseID;
+
 
 
     public Skill()
@@ -21,11 +27,11 @@ public class Skill
 
     }
 
-    public Skill(String name, int nbrSkills, int recommendedWeek)
+    public Skill(String name, int nbrSkills, Date recommendedWeek)
     {
         this.name = name;
         this.nbrSubSkills = nbrSkills;
-        this. recommendedWeek = recommendedWeek;
+        this.recommendedWeek = recommendedWeek;
     }
 
     public long getId()
@@ -58,13 +64,21 @@ public class Skill
         this.nbrSubSkills = nbrSubSkills;
     }
 
-    public int getRecommendedWeek()
+    public Date getRecommendedWeek()
     {
         return recommendedWeek;
     }
 
-    public void setRecommendedWeek(int recommendedWeek)
+    public void setRecommendedWeek(Date recommendedWeek)
     {
         this.recommendedWeek = recommendedWeek;
+    }
+
+    public Course getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(Course courseID) {
+        this.courseID = courseID;
     }
 }
