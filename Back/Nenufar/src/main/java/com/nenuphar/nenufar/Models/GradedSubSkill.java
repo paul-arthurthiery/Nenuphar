@@ -1,9 +1,6 @@
 package com.nenuphar.nenufar.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="GradedSubSkill")
@@ -14,19 +11,27 @@ public class GradedSubSkill
     private long id;
 
     private int level;
-    private int subskill_id; // (FOREIGN KEY)
-    private int user_id; // (FOREIGN KEY)
+
+    @ManyToOne
+    @JoinColumn(name="subskill_ID")
+    private SubSkill subSkillID;
+
+    @ManyToOne
+    @JoinColumn(name="user_ID")
+    private User userID; // (FOREIGN KEY)
+
+
 
     public GradedSubSkill()
     {
 
     }
 
-    public GradedSubSkill(int level, int subskill_id, int user_id)
+    public GradedSubSkill(int level, SubSkill subSkillID, User userID)
     {
         this.level = level; // SET AS NULL BY DEFAULT IN DB ??
-        this.subskill_id = subskill_id;
-        this.user_id = user_id;
+        this.subSkillID = subSkillID;
+        this.userID = userID;
     }
 
     public long getId()
@@ -49,23 +54,20 @@ public class GradedSubSkill
         this.level = level;
     }
 
-    public int getSubskill_id()
-    {
-        return subskill_id;
+    public SubSkill getSubSkillID() {
+        return subSkillID;
     }
 
-    public void setSubskill_id(int subskill_id)
-    {
-        this.subskill_id = subskill_id;
+    public void setSubSkillID(SubSkill subSkillID) {
+        this.subSkillID = subSkillID;
     }
 
-    public int getUser_id()
-    {
-        return user_id;
+    public User getUserID() {
+        return userID;
     }
 
-    public void setUser_id(int user_id)
-    {
-        this.user_id = user_id;
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
+
 }

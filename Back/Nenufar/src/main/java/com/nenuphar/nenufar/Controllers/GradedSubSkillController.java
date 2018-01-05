@@ -1,6 +1,8 @@
 package com.nenuphar.nenufar.Controllers;
 
 import com.nenuphar.nenufar.Models.GradedSubSkill;
+import com.nenuphar.nenufar.Models.SubSkill;
+import com.nenuphar.nenufar.Models.User;
 import com.nenuphar.nenufar.Services.GradedSubSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +25,9 @@ public class GradedSubSkillController
     }
 
     @RequestMapping(value = "/gradedsubskill/", method = RequestMethod.POST)
-    public ResponseEntity createGradedSubSkill(@RequestBody int level, int subskill_id, int user_id)
+    public ResponseEntity createGradedSubSkill(@RequestBody int level, SubSkill subSkillID, User user)
     {
-        GradedSubSkill gradedsubskill = gradedsubSkillService.createGradedSubSkill(level, subskill_id, user_id);
+        GradedSubSkill gradedsubskill = gradedsubSkillService.createGradedSubSkill(level, subSkillID, user);
         if(gradedsubskill==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         return new ResponseEntity(gradedsubskill, HttpStatus.OK);
     }

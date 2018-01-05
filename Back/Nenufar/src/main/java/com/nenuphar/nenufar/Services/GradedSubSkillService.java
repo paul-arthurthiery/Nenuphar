@@ -1,6 +1,8 @@
 package com.nenuphar.nenufar.Services;
 
 import com.nenuphar.nenufar.Models.GradedSubSkill;
+import com.nenuphar.nenufar.Models.SubSkill;
+import com.nenuphar.nenufar.Models.User;
 import com.nenuphar.nenufar.Repositories.GradedSubSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,9 @@ public class GradedSubSkillService
 
     public GradedSubSkill getPostedGradedSubSkill(GradedSubSkill gradedsubSkill){ return gradedsubSkill;}
 
-    public GradedSubSkill createGradedSubSkill(int level, int subskill_id, int user_id)
+    public GradedSubSkill createGradedSubSkill(int level, SubSkill subSkillID, User userID)
     {
-        GradedSubSkill gradedsubskill = new GradedSubSkill(level, subskill_id, user_id);
+        GradedSubSkill gradedsubskill = new GradedSubSkill(level, subSkillID, userID);
         gradedsubSkillRepository.save(gradedsubskill);
         return gradedsubskill;
     }
