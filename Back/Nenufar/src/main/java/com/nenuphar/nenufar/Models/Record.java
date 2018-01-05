@@ -15,6 +15,10 @@ public class Record
     private int nbrCourses;
     private Date deadlines;
 
+    @ManyToOne
+    @JoinColumn(name = "course_ID")
+    private Course courseID;
+
     public Record()
     {
 
@@ -55,4 +59,13 @@ public class Record
     {
         this.deadlines = deadline;
     }
+
+    public Course getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(Course courseID) {
+        this.courseID = courseID;
+    }
+
 }

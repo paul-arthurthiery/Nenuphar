@@ -4,6 +4,8 @@ import com.nenuphar.nenufar.Models.Skill;
 import com.nenuphar.nenufar.Repositories.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Date;
+
 
 @Service
 public class SkillService {
@@ -15,7 +17,7 @@ public class SkillService {
 
     public Skill getPostedSkill(Skill skill){ return skill;}
 
-    public Skill createSkill(String name, int nbrSkills, int recommendedWeek)
+    public Skill createSkill(String name, int nbrSkills, Date recommendedWeek)
     {
         Skill skill = new Skill(name, nbrSkills, recommendedWeek);
         skillRepository.save(skill);

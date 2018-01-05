@@ -14,6 +14,10 @@ public class Workgroup
     private String name;
     private int Size;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_ID")
+    private User teacherID;
+
     public Workgroup()
     {
 

@@ -14,6 +14,10 @@ public class Team
     private int size;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "workgroup_ID")
+    private Workgroup workgroupID;
+
     public Team()
     {
 
@@ -53,5 +57,13 @@ public class Team
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public Workgroup getWorkgroupID() {
+        return workgroupID;
+    }
+
+    public void setWorkgroupID(Workgroup workgroupID) {
+        this.workgroupID = workgroupID;
     }
 }
