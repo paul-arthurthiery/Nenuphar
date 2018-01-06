@@ -142,5 +142,30 @@ public class User
     public void setRecords(Set<Record> records) {
         this.records = records;
     }
+
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Workgroup> workgroups = new HashSet<>();
+
+    public Set<Workgroup> getWorkgroups() {
+        return workgroups;
+    }
+
+    public void setWorkgroups(Set<Workgroup> workgroups) {
+        this.workgroups = workgroups;
+    }
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Team> teams = new HashSet<>();
+
+    public Set<Team> getTeams()
+    {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams)
+    {
+        this.teams = teams;
+    }
 // standard constructors/getters/setters
 }

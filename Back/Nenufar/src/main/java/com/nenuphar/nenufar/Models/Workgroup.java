@@ -1,6 +1,8 @@
 package com.nenuphar.nenufar.Models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -58,4 +60,22 @@ public class Workgroup
     {
         this.Size = size;
     }
+
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Workgroup_user",
+            joinColumns = { @JoinColumn(name = "workgroup_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    Set<User> users = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
 }

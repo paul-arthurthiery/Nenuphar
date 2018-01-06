@@ -90,4 +90,5 @@ public class Record
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
 }
