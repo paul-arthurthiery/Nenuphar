@@ -1,7 +1,7 @@
-com/nenuphar/nenufar/Repositories/GradedSubSkillRepository.class
-com/nenuphar/nenufar/Controllers/GradedSubSkillController.class
-com/nenuphar/nenufar/Controllers/WorkgroupController.class
-com/nenuphar/nenufar/Services/WorkgroupService.class
-com/nenuphar/nenufar/Models/GradedSubSkill.class
-com/nenuphar/nenufar/Services/GradedSubSkillService.class
-com/nenuphar/nenufar/Repositories/WorkgroupRepository.class
+com\nenuphar\nenufar\Repositories\GradedSubSkillRepository.class
+com\nenuphar\nenufar\Services\WorkgroupService.class
+com\nenuphar\nenufar\Services\GradedSubSkillService.class
+com\nenuphar\nenufar\Repositories\WorkgroupRepository.class
+com\nenuphar\nenufar\Controllers\GradedSubSkillController.class
+com\nenuphar\nenufar\Models\GradedSubSkill.class
+com\nenuphar\nenufar\Controllers\WorkgroupController.class
