@@ -2,10 +2,10 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/Nenuphar?createDatabaseIfNotExist=true&useSSL=false
     username: root
-    password:
+    password: root
 
-server:
-  port: 8000
+#server:
+#  port: 8000
 
 # Show or not log for each sql query
 spring.jpa.show-sql: true
