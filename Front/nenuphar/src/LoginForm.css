@@ -1,0 +1,10 @@
+body {
+  margin: auto;
+  display: grid;
+  grid: repeat(3, 1fr) / repeat(3, 1fr);
+  background-color: #272938;
+}
+
+.test {
+  grid-area: 2 / 2 / auto / auto;
+}

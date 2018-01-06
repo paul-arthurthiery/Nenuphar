@@ -1,5 +1,10 @@
 .DS_Store
 _DS_Store
-Back/Nenufar/.idea/
+Back/Nenufar/.idea/*
 Back/Nenufar/.idea
 Back/Nenufar/Nenufar.iml
+Back/Nenufar/src/main/resources/application.yml
+Back/Nenufar/target/
+Back/Nenufar/target/*
+Front/
+Front/*
