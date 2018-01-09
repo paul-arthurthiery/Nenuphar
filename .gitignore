@@ -6,5 +6,4 @@ Back/Nenufar/Nenufar.iml
 Back/Nenufar/src/main/resources/application.yml
 Back/Nenufar/target/
 Back/Nenufar/target/*
-Front/
-Front/*
+Front/nenuphar/test.*
