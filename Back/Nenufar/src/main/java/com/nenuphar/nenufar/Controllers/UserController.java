@@ -1,6 +1,8 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.Models.LDAP;
 import com.nenuphar.nenufar.Models.User;
+import com.nenuphar.nenufar.Services.LDAPService;
 import com.nenuphar.nenufar.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    private LDAPService ldapService;
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     private ResponseEntity getUserById(@PathVariable("id") long id){
@@ -21,9 +24,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent){
+    public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent)
+    {
         User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
         if(user==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         return new ResponseEntity(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login/", method = RequestMethod.POST)
+    public ResponseEntity login(@RequestBody String login, String password)
+    {
+        LDAP ldap;
+        try
+        {
+            ldap = ldapService.LDAPget(login, password);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        if(ldap==null){return new ResponseEntity(HttpStatus.NOT_FOUND);}
+        return new ResponseEntity<>(ldap, HttpStatus.OK);
     }
 }
