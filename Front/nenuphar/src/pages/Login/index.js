@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import './LoginForm.css';
 import TextField from 'material-ui/TextField';
-import Logo from '../../Logo.png';
+import Logo from '../../logo.png';
 
 export default class Login extends Component {
   state = {
