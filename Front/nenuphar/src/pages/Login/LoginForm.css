@@ -1,0 +1,31 @@
+.LoginPage {
+  display: grid;
+  background-color: #272938;
+  grid: repeat(4, 100px)/repeat(6, 1fr);
+  height: 100%;
+  width: 100%; }
+  .LoginPage h1 {
+    margin: auto;
+    grid-row: 1 / span 1;
+    grid-column: 3 / span 2;
+    color: #f00; }
+  .LoginPage h1 span {
+    color: #fff; }
+  .LoginPage form {
+    margin: auto;
+    width: 80%;
+    grid-row: 3 / span 2;
+    grid-column: 3 / span 2; }
+  .LoginPage .textfield {
+    margin-bottom: 30% !important;
+    width: 100%; }
+  .LoginPage img {
+    width: 50%;
+    height: 200%;
+    grid-row: 1 / span 1;
+    grid-column: 5 / span 2;
+    margin: auto;
+    margin-top: 10%; }
+  .LoginPage .button {
+    margin: auto;
+    width: 100%; }
