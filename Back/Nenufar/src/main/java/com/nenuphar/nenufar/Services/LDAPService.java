@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Services;
 
+
 import com.nenuphar.nenufar.Models.LDAP;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,28 @@ import java.util.Hashtable;
 import javax.naming.*;
 import javax.naming.directory.*;
 
+
+/**
+ * accès à l'annuaire LDAP de l'ISEP
+ * pour :
+ * authentification des utilisateurs
+ * retrouver le mail ISEP d'un utilisateur
+ * @author gilles Carpentier
+ * @version 09/02/2015 ajout de la fermeture du contexte pour libérer les ressources plus rapidement
+ */
+
 @Service
 public class LDAPService implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
+
 	public LDAP LDAPget(String user, String mdp) throws Exception
 	{
-        // Initial context implementation
+//		System.out.println(user + " " + mdp);
+		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
-		String MY_HOST = "ldap://ldap.isep.fr:636";
+		String MY_HOST = "ldap://ldap.isep.fr:389";
 		String MGR_DN = "uid=" + user + ", " + "ou=People, dc=isep.fr";
 		String MGR_PW = mdp;
 		String MY_SEARCHBASE = "dc=isep.fr";
@@ -31,16 +44,15 @@ public class LDAPService implements Serializable
 		String employeeNumber = null;
 		String mail = null;
 		String messageErreur = "LOGIN INVALIDE";
-
-		try {
+		try
+		{
 
 			// Hashtable for environmental information
 			Hashtable<String, String> env = new Hashtable<String, String>();
 
 			// Specify which class to use for our JNDI provider
 			env.put(Context.INITIAL_CONTEXT_FACTORY, INITCTX);
-			// Specify SSL
-			env.put(Context.SECURITY_PROTOCOL, "ssl");
+
 			// Specify host and port to use for directory service
 			env.put(Context.PROVIDER_URL, MY_HOST);
 			env.put(Context.SECURITY_AUTHENTICATION, "simple");
@@ -57,23 +69,25 @@ public class LDAPService implements Serializable
 			// Perform the actual search
 			// We give it a searchbase, a filter and a the constraints
 			// containing the scope of the search
-			NamingEnumeration<SearchResult> results = ctx.search(MY_SEARCHBASE, MY_FILTER, constraints);
+			NamingEnumeration<SearchResult> results = ctx.search(MY_SEARCHBASE,
+					MY_FILTER, constraints);
 
 			// Now step through the search results
-			while (results != null && results.hasMore()) {
-
+			while (results != null && results.hasMore())
+			{
 				SearchResult sr = (SearchResult) results.next();
 
 				String dn = sr.getName();
+//				System.out.println("Distinguished Name is " + dn);
 
 				Attribute cn = sr.getAttributes().get("cn");
 				nom = (String) cn.get();
 				Attribute uid = sr.getAttributes().get("uid");
 				login = (String) uid.get();
 				Attribute et = sr.getAttributes().get("employeeType");
-				type = (String) et.get();				
+				type = (String) et.get();
 				Attribute sn = sr.getAttributes().get("sn");
-				nomFamille = (String) sn.get();				
+				nomFamille = (String) sn.get();
 				Attribute givenName = sr.getAttributes().get("givenname");
 				prenom = (String) givenName.get();
 
@@ -83,24 +97,19 @@ public class LDAPService implements Serializable
 				} catch (Exception e) {
 					messageErreur = "numéro d'élève non trouvé dans l'annuaire";
 				}
-
-				Attribute em = sr.getAttributes().get("mail");			
-				mail = (String) em.get();				
+				Attribute em = sr.getAttributes().get("mail");
+				mail = (String) em.get();
+//				System.out.println("nom=" + nom + " login=" + login+ " type=" + type + " numero=" + employeeNumber + " mail=" + mail);
 
 				ctx.close();
-
 			}
-
-		} catch (Exception e) {
-
+		} catch (Exception e)
+		{
 			System.err.println(e);
 			throw (new Exception(messageErreur));
-
 		}
 
 		LDAP reponse = new LDAP(login, mdp, nom, nomFamille, prenom, type, employeeNumber, mail);
 		return reponse;
-
 	}
-
 }

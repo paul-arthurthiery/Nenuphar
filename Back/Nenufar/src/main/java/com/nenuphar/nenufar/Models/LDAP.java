@@ -8,12 +8,11 @@ public class LDAP implements Serializable
 	public String nom;
 	public String nomFamille;
 	public String prenom;
-	private String employeeType; 
+	private String employeeType;
 	private String employeeNumber;
 	public String login;
 	public String password;
 	public String mail;
-
 
 	public LDAP() {
 		super();
@@ -31,11 +30,14 @@ public class LDAP implements Serializable
 		this.mail = mail;
 	}
 
+	/*public LDAP() {
+		super();
+	}*/
+
 	public String getNom()
 	{
 		return nom;
 	}
-
 	public void setNom(String nom)
 	{
 		this.nom = nom;
@@ -45,12 +47,10 @@ public class LDAP implements Serializable
 	{
 		return login;
 	}
-
 	public String getType()
 	{
 		return employeeType;
 	}
-
 	public String getNumber()
 	{
 		return employeeNumber;
@@ -63,11 +63,10 @@ public class LDAP implements Serializable
 	public String getPassword() {
 		return password;
 	}
-
 	public String toString()
 	{
 		return "login = " + login + " nom = " + nom + " type = " + employeeType + " id = " + employeeNumber;
- 	}
+	}
 
 	public String getNomFamille() {
 		return nomFamille;

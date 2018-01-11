@@ -14,6 +14,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public User getUser(Long id){ return userRepository.findOne(id); }
+    public User getUserByLogin(String login){ return userRepository.findByName(login); }
 
     public User getPostedUser(User user){ return user;}
 

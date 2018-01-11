@@ -34,6 +34,7 @@ public class UserController {
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody String login, String password)
     {
+
         LDAP ldap;
         try
         {
@@ -42,9 +43,31 @@ public class UserController {
         catch (Exception e)
         {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if(ldap==null){return new ResponseEntity(HttpStatus.NOT_FOUND);}
+        if(ldap==null){return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
+
         return new ResponseEntity<>(ldap, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/test/", method = RequestMethod.POST)
+    public ResponseEntity test(@RequestBody String login, String password)
+    {
+        if(login == "test")
+        {
+            return new ResponseEntity<>("le login", HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<>("login : "+login+" / "+"password : "+password, HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = "/test/{login}", method = RequestMethod.GET)
+    private ResponseEntity getUserByLogin(@PathVariable("login") String login)
+    {
+        User user = userService.getUserByLogin(login);
+        if(user==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
