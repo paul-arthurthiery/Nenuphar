@@ -23,17 +23,24 @@ const theme = createMuiTheme({
   }
 });
 
-const App = () => (
-  <Reboot>
-    <MuiThemeProvider theme={theme}>
-      <Router>
-
-
-          <Route exact path="/" component={Login} />
-
-      </Router>
-    </MuiThemeProvider>
-  </Reboot>
-)
+const App = () => {
+  const isAuthenticated = //// check if authenticated
+  return (
+    <Reboot>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          { isAuthenticated ?
+            <PageLayout>
+            </PageLayout>
+            :
+            <div>
+              <Route exact path="/" component={Login} />
+            </div>
+          }
+        </Router>
+      </MuiThemeProvider>
+    </Reboot>
+  );
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));

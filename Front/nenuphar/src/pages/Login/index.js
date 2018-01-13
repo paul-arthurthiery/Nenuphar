@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+
 import Button from 'material-ui/Button';
-import './LoginForm.css';
 import TextField from 'material-ui/TextField';
+
+import {login} from '../../services/userService';
+import {setToken} from '../../services/request';
+
 import Logo from '../../logo.png';
-import Request from '../../services/request';
+import './LoginForm.css';
+
 
 export default class Login extends Component {
   state = {
@@ -19,10 +24,14 @@ export default class Login extends Component {
     this.setState({password: event.target.value});
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    const data = await login(this.state.name, this.state.password);
 
-    
+    setToken(data.token);
+    this.props.onLoginSuccess(token);
+
+    this.props.history.push("/accueil");
   }
 
   render() {
@@ -37,7 +46,7 @@ export default class Login extends Component {
           <br/>
           <TextField className="textfield" placeholder="Mot de passe ISEP" onChange={this.handlePasswordChange}/>
           <br/>
-          <Button className="button" raised={true} type="submit" onClick={console.log(this.handleSubmit)}>
+          <Button className="button" raised={true} type="submit" onClick={this.handleSubmit}>
             Connexion
           </Button>
         </form>
