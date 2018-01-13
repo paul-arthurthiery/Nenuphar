@@ -28,7 +28,7 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent)
     {
         User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
-        if(user==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        if (user==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
@@ -36,73 +36,54 @@ public class UserController {
     public ResponseEntity login(@RequestBody String login, String password)
     {
         User user = userService.getUserByLogin(login);
-        // IF USER NOT FOUND IN DATABASE
-        if(user==null)
-        {
-            // HERE MAKE LDAP CHECK
-            // ##### LDAP STUFF NOT WORKING YET
-            LDAP person = null;
-            try
-            {
-                person = ldapService.LDAPget(login, password);
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            //######
 
-            if(person != null/* USER FOUND ON LDAP*/)
-            {
-                // NEW USER IN DATABASE
-                String p_nom = person.getNom();
-                String p_nomFamille = person.getNomFamille();
-                String p_prenom = person.getPrenom();
-                String p_employeeType = person.getType();
-                String p_employeeNumber = person.getNumber();
-                String p_login = person.getLogin();
-                String p_password = person.getPassword();
-                String p_mail = person.getMail();
-                boolean isTutor = false;
-                boolean isStudent = false;
-
-                if(p_employeeType == "teacher") {isTutor = true;}
-                else if(p_employeeType == "student"){isStudent = true;}
-
-                User new_user = userService.createUser(p_prenom,p_nomFamille,p_mail,p_login,p_password,false,false,isTutor,isStudent);
-                if(new_user == null) return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-                return new ResponseEntity(new_user, HttpStatus.CREATED);
-            }
-            else // USER NOT FOUND ON LDAP
-            {
-                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-            }
-        }
-        else if(user!=null) // USER FOUND IN DATABASE
-        {
+        if (user != null) {
+            // USER FOUND IN DATABASE
+            
             String valid_password = user.getPassword();
-            if(password == valid_password) // CORRECT PASSWORD
-            {
-                // LOGIN THE USER
-            }
-            else
-            {
+            if (! password.equals(valid_password)) {
                 return new ResponseEntity(HttpStatus.UNAUTHORIZED);
             }
+            
+            // user is authenticated
+            // TODO perform authentication logic here
+            
+            return new ResponseEntity(HttpStatus.OK);
         }
-
-        LDAP ldap;
-        try
-        {
-            ldap = ldapService.LDAPget(login, password);
-        }
-        catch (Exception e)
-        {
+        
+        // user not found in database :
+            
+        // HERE MAKE LDAP CHECK
+        // TODO LDAP STUFF NOT WORKING YET
+        LDAP person = null;
+        try {
+            person = ldapService.LDAPget(login, password);
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if(ldap==null){return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
 
-        return new ResponseEntity<>(ldap, HttpStatus.OK);
+        if (person == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        
+        // Create the user in database :
+        String p_nom = person.getNom();
+        String p_nomFamille = person.getNomFamille();
+        String p_prenom = person.getPrenom();
+        String p_employeeType = person.getType();
+        String p_employeeNumber = person.getNumber();
+        String p_login = person.getLogin();
+        String p_password = person.getPassword();
+        String p_mail = person.getMail();
+        boolean isTutor = false;
+        boolean isStudent = false;
+
+        if (("teacher").equals(p_employeeType)) isTutor = true;
+        else if (("student").equals(p_employeeType)) isStudent = true;
+
+        User new_user = userService.createUser(p_prenom, p_nomFamille, p_mail, p_login, p_password,false,false, isTutor, isStudent);
+        
+        return new ResponseEntity(new_user, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
@@ -111,12 +92,9 @@ public class UserController {
         String login = dto.getLogin();
         String password = dto.getPassword();
 
-        if(login == "test")
-        {
+        if(("test").equals(login)) {
             return new ResponseEntity<>("le login", HttpStatus.OK);
-        }
-        else
-        {
+        } else {
             return new ResponseEntity<>("login : "+login+" / "+"password : "+password, HttpStatus.OK);
         }
     }
