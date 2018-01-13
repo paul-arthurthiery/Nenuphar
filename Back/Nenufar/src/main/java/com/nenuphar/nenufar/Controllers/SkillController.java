@@ -23,7 +23,7 @@ public class SkillController {
         return new ResponseEntity<>(skill, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/skill/", method = RequestMethod.POST)
+    @RequestMapping(value = "/skill", method = RequestMethod.POST)
     public ResponseEntity createSkill(@RequestBody String name, int nbrSkills, Date recommendedWeek)
     {
         Skill skill = skillService.createSkill(name, nbrSkills, recommendedWeek);

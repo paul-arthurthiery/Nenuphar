@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.DTO.LoginAttemptDTO;
 import com.nenuphar.nenufar.Models.LDAP;
 import com.nenuphar.nenufar.Models.User;
 import com.nenuphar.nenufar.Services.LDAPService;
@@ -23,7 +24,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent)
     {
         User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
@@ -31,7 +32,7 @@ public class UserController {
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/login/", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody String login, String password)
     {
         User user = userService.getUserByLogin(login);
@@ -104,9 +105,12 @@ public class UserController {
         return new ResponseEntity<>(ldap, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/test/", method = RequestMethod.POST)
-    public ResponseEntity test(@RequestBody String login, String password)
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public ResponseEntity test(@RequestBody LoginAttemptDTO dto)
     {
+        String login = dto.getLogin();
+        String password = dto.getPassword();
+
         if(login == "test")
         {
             return new ResponseEntity<>("le login", HttpStatus.OK);

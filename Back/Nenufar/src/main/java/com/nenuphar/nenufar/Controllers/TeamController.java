@@ -21,7 +21,7 @@ public class TeamController {
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/team/", method = RequestMethod.POST)
+    @RequestMapping(value = "/team", method = RequestMethod.POST)
     public ResponseEntity createTeam(@RequestBody int size, String name)
     {
         Team team = teamService.createTeam(size, name);

@@ -3,6 +3,8 @@ import Button from 'material-ui/Button';
 import './LoginForm.css';
 import TextField from 'material-ui/TextField';
 import Logo from '../../logo.png';
+import Request from '../../services/request';
+import axios from 'axios';
 
 export default class Login extends Component {
   state = {
@@ -20,7 +22,7 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    alert('Submitted name: ' + this.state.name);
+
   }
 
 
@@ -36,7 +38,7 @@ export default class Login extends Component {
           <br/>
           <TextField className="textfield" placeholder="Mot de passe ISEP" onChange={this.handlePasswordChange}/>
           <br/>
-          <Button className="button" raised={true} type="submit" onClick={console.log(this.state.label)}>
+          <Button className="button" raised={true} type="submit" onClick={console.log(this.handleSubmit)}>
             Connexion
           </Button>
         </form>

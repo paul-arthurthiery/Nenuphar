@@ -31,12 +31,14 @@
   }
 
   img {
-    width: 50%;
-    height: 200%;
+    max-width: 50%;
+    max-height: 200%;
     grid-row: 1 / span 1 ;
     grid-column: 5 / span 2;
     margin: auto;
     margin-top: 10%;
+    width: auto;
+    height: auto;
   }
 
   .button {

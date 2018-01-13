@@ -21,7 +21,7 @@ public class WorkgroupController
         return new ResponseEntity<>(workgroup, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/workgroup/", method = RequestMethod.POST)
+    @RequestMapping(value = "/workgroup", method = RequestMethod.POST)
     public ResponseEntity createWorkgroup(@RequestBody String name, int size)
     {
         Workgroup workgroup = workgroupService.createWorkgroup(name, size);

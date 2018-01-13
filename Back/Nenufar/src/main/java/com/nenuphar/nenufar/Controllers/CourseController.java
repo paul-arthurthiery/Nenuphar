@@ -21,7 +21,7 @@ public class CourseController {
         return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/course/", method = RequestMethod.POST)
+    @RequestMapping(value = "/course", method = RequestMethod.POST)
     public ResponseEntity createCourse(@RequestBody String name, int nbrSkills)
     {
         Course course = courseService.createCourse(name, nbrSkills);

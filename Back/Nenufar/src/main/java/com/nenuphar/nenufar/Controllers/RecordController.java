@@ -22,7 +22,7 @@ public class RecordController {
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/record/", method = RequestMethod.POST)
+    @RequestMapping(value = "/record", method = RequestMethod.POST)
     public ResponseEntity createRecord(@RequestBody int nbrCourses, Date deadlines)
     {
         Record record = recordService.createRecord(nbrCourses, deadlines);

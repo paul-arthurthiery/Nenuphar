@@ -21,7 +21,7 @@ public class SubSkillController {
         return new ResponseEntity<>(subskill, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/subskill/", method = RequestMethod.POST)
+    @RequestMapping(value = "/subskill", method = RequestMethod.POST)
     public ResponseEntity createSubSkill(@RequestBody String name, int grade)
     {
         SubSkill subskill = subSkillService.createSubSkill(name, grade);

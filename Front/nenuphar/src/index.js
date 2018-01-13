@@ -27,13 +27,10 @@ const App = () => (
   <Reboot>
     <MuiThemeProvider theme={theme}>
       <Router>
-        <PageLayout>
-          <Route path="/home" component={StudentHome} />
-          <Route path="/subject" component={Subject} />
-          <Route path="/team/member/:id" component={TeamMember} />
-          <Route exact path="/team" component={TeamMembers} />
+
+
           <Route exact path="/" component={Login} />
-        </PageLayout>
+
       </Router>
     </MuiThemeProvider>
   </Reboot>
