@@ -34,6 +34,60 @@ public class UserController {
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody String login, String password)
     {
+        User user = userService.getUserByLogin(login);
+        // IF USER NOT FOUND IN DATABASE
+        if(user==null)
+        {
+            // HERE MAKE LDAP CHECK
+            // ##### LDAP STUFF NOT WORKING YET
+            LDAP person = null;
+            try
+            {
+                person = ldapService.LDAPget(login, password);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            //######
+
+            if(person != null/* USER FOUND ON LDAP*/)
+            {
+                // NEW USER IN DATABASE
+                String p_nom = person.getNom();
+                String p_nomFamille = person.getNomFamille();
+                String p_prenom = person.getPrenom();
+                String p_employeeType = person.getType();
+                String p_employeeNumber = person.getNumber();
+                String p_login = person.getLogin();
+                String p_password = person.getPassword();
+                String p_mail = person.getMail();
+                boolean isTutor = false;
+                boolean isStudent = false;
+
+                if(p_employeeType == "teacher") {isTutor = true;}
+                else if(p_employeeType == "student"){isStudent = true;}
+
+                User new_user = userService.createUser(p_prenom,p_nomFamille,p_mail,p_login,p_password,false,false,isTutor,isStudent);
+                if(new_user == null) return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity(new_user, HttpStatus.CREATED);
+            }
+            else // USER NOT FOUND ON LDAP
+            {
+                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            }
+        }
+        else if(user!=null) // USER FOUND IN DATABASE
+        {
+            String valid_password = user.getPassword();
+            if(password == valid_password) // CORRECT PASSWORD
+            {
+                // LOGIN THE USER
+            }
+            else
+            {
+                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            }
+        }
 
         LDAP ldap;
         try
