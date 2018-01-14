@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.UUID;
+
 
 @RestController
 public class UserController {
@@ -32,12 +34,14 @@ public class UserController {
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
         User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
         if (user==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
-        return new ResponseEntity(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody String login, String password)
+    public ResponseEntity login(@RequestBody LoginAttemptDTO dto)
     {
+        String login = dto.getLogin();
+        String password = dto.getPassword();
         User user = userService.getUserByLogin(login);
 
         if (user != null) {
@@ -51,8 +55,9 @@ public class UserController {
             
             // user is authenticated
             // TODO perform authentication logic here
-            
-            return new ResponseEntity(HttpStatus.OK);
+            String uuid = UUID.randomUUID().toString();
+            user.setUuid(uuid);
+            return new ResponseEntity<>(uuid, HttpStatus.OK);
         }
         
         // user not found in database :
@@ -88,8 +93,8 @@ public class UserController {
         String encodedPassword = new BCryptPasswordEncoder().encode(p_password);
 
         User new_user = userService.createUser(p_prenom, p_nomFamille, p_mail, p_login, encodedPassword,false,false, isTutor, isStudent);
-        
-        return new ResponseEntity(new_user, HttpStatus.CREATED);
+        String uuid = new_user.getUuid();
+        return new ResponseEntity<>(uuid, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
