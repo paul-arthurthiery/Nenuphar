@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @RestController
 public class UserController {
@@ -27,8 +29,9 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent)
     {
+        String encodedPassword = new BCryptPasswordEncoder().encode(password);
         User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
-        if (user==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        if (user==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
@@ -41,7 +44,8 @@ public class UserController {
             // USER FOUND IN DATABASE
             
             String valid_password = user.getPassword();
-            if (! password.equals(valid_password)) {
+            BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
+            if (! pwEncoder.matches(password, valid_password)) {
                 return new ResponseEntity(HttpStatus.UNAUTHORIZED);
             }
             
@@ -81,7 +85,9 @@ public class UserController {
         if (("teacher").equals(p_employeeType)) isTutor = true;
         else if (("student").equals(p_employeeType)) isStudent = true;
 
-        User new_user = userService.createUser(p_prenom, p_nomFamille, p_mail, p_login, p_password,false,false, isTutor, isStudent);
+        String encodedPassword = new BCryptPasswordEncoder().encode(p_password);
+
+        User new_user = userService.createUser(p_prenom, p_nomFamille, p_mail, p_login, encodedPassword,false,false, isTutor, isStudent);
         
         return new ResponseEntity(new_user, HttpStatus.CREATED);
     }
