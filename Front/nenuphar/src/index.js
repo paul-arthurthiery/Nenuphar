@@ -24,6 +24,10 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+  setAuthenticated = () => {
+    this.setState()
+  }
+
   const isAuthenticated = //// check if authenticated
   return (
     <Reboot>
@@ -34,7 +38,7 @@ const App = () => {
             </PageLayout>
             :
             <div>
-              <Route exact path="/" component={Login} />
+              <Route exact path="/" component={Login} onLoginSuccess={this.setAuthenticated} />
             </div>
           }
         </Router>

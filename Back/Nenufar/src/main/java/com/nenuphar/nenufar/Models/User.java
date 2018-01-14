@@ -18,6 +18,7 @@ public class User
     private String email;
     private String login;
     private String password;
+    private String uuid;
     private boolean isRespoAPP;
     private boolean isAdmin;
     private boolean isTutor;
@@ -28,7 +29,7 @@ public class User
 
     }
 
-    public User(String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent) {
+    public User(String name, String lastName, String email, String login, String password, String uuid, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -167,5 +168,14 @@ public class User
     {
         this.teams = teams;
     }
-// standard constructors/getters/setters
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    // standard constructors/getters/setters
 }
