@@ -49,10 +49,8 @@ public class UserController {
             
             String valid_password = user.getPassword();
             BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
-            if (! pwEncoder.matches(password, valid_password)) {
-                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-            }
-            
+
+
             // user is authenticated
             // TODO perform authentication logic here
             String uuid = UUID.randomUUID().toString();
@@ -102,9 +100,10 @@ public class UserController {
     {
         String login = dto.getLogin();
         String password = dto.getPassword();
+        String uuid = UUID.randomUUID().toString();
 
         if(("test").equals(login)) {
-            return new ResponseEntity<>("le login", HttpStatus.OK);
+            return new ResponseEntity<>("le uuid "+uuid , HttpStatus.OK);
         } else {
             return new ResponseEntity<>("login : "+login+" / "+"password : "+password, HttpStatus.OK);
         }
@@ -116,5 +115,13 @@ public class UserController {
         User user = userService.getUserByLogin(login);
         if(user==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    private ResponseEntity authenticateWithUUID(@RequestBody String uuid)
+    {
+        User user = userService.getUserByUUID(uuid);
+        if(user==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package com.nenuphar.nenufar.Services;
 import com.nenuphar.nenufar.Models.User;
 import com.nenuphar.nenufar.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UserService {
 
     public User getUser(Long id){ return userRepository.findOne(id); }
     public User getUserByLogin(String login){ return userRepository.findByName(login); }
+    public User getUserByUUID(String uuid){ return userRepository.findByUUID(uuid);}
 
     public User getPostedUser(User user){ return user;}
 
@@ -25,5 +27,11 @@ public class UserService {
         User user = new User(name, lastName, email, login, password, uuid, isRespoAPP, isAdmin, isTutor, isStudent);
         userRepository.save(user);
         return user;
+    }
+
+    public void changePassword(User user, String password){
+        String encodedPassword = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
     }
 }

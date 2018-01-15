@@ -15,6 +15,15 @@ import StudentHome from './pages/student/Home';
 import TeamMembers from './pages/student/TeamMembers';
 import TeamMember from './pages/student/TeamMember';
 import Subject from './pages/student/Subject';
+import {checkAuth} from './services/userService'
+
+state = {
+  isAuthenticated: '',
+}
+
+const TOKEN_STORAGE_KEY = "nenuphar_access_token";
+var token = localStorage.getItem(TOKEN_STORAGE_KEY);
+const authenticationResponse =  checkAuth(token).then( (data) => {return data});
 
 const theme = createMuiTheme({
   palette: {
@@ -24,11 +33,13 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
-  setAuthenticated = () => {
-    this.setState()
+  setAuthenticated = (value) => {
+    this.setState({isAuthenticated: value})
   }
 
-  const isAuthenticated = //// check if authenticated
+  let isAuthenticated;
+  (token && authenticationResponse.status=="200") ? setAuthenticated(true) : setAuthenticated(false);
+
   return (
     <Reboot>
       <MuiThemeProvider theme={theme}>
