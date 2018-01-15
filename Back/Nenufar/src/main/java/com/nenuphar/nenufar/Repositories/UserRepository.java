@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends CrudRepository<User, Long>
 {
     User findByName(@Param("login") String login);
-    User findByUUID(@Param("uuid") String uuid);
+    User findByUuid(@Param("uuid") String uuid);
 }

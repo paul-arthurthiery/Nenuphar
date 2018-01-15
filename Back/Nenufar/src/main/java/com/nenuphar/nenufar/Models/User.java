@@ -29,7 +29,7 @@ public class User
 
     }
 
-    public User(String name, String lastName, String email, String login, String password, String uuid, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent) {
+    public User(String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;

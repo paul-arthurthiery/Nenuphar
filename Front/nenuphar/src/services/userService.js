@@ -1,4 +1,6 @@
 import { postJson } from './request';
+const TOKEN_STORAGE_KEY = "nenuphar_access_token";
+
 
 export function login(username, password) {
   return postJson("/login", {
@@ -7,6 +9,14 @@ export function login(username, password) {
   });
 }
 
-export function checkAuth(token) {
-  return postJson("/authenticate", token);
+export function checkAuth() {
+  var token = localStorage.getItem(TOKEN_STORAGE_KEY);
+  postJson("/authenticate", token).then( (data) => {
+    if (data.status == "200"){
+      return true;
+    }
+    return false;
+  }).catch( () => {
+    return false;
+  });;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -11,19 +11,12 @@ import './index.css';
 import PageLayout from './components/PageLayout';
 
 import Login from './pages/Login';
-import StudentHome from './pages/student/Home';
-import TeamMembers from './pages/student/TeamMembers';
-import TeamMember from './pages/student/TeamMember';
-import Subject from './pages/student/Subject';
+import StudentHome from './pages/Student/Home';
+import TeamMembers from './pages/Student/TeamMembers';
+import TeamMember from './pages/Student/TeamMember';
+import Subject from './pages/Student/Subject';
 import {checkAuth} from './services/userService'
 
-state = {
-  isAuthenticated: '',
-}
-
-const TOKEN_STORAGE_KEY = "nenuphar_access_token";
-var token = localStorage.getItem(TOKEN_STORAGE_KEY);
-const authenticationResponse =  checkAuth(token).then( (data) => {return data});
 
 const theme = createMuiTheme({
   palette: {
@@ -32,30 +25,36 @@ const theme = createMuiTheme({
   }
 });
 
-const App = () => {
-  setAuthenticated = (value) => {
-    this.setState({isAuthenticated: value})
+export class App extends Component {
+  state = {
+    isAuthenticated : false
   }
 
-  let isAuthenticated;
-  (token && authenticationResponse.status=="200") ? setAuthenticated(true) : setAuthenticated(false);
+  async componentWillMount(){
+    this.setState({isAuthenticated : checkAuth()});
+    console.log(this.state.isAuthenticated);
+  }
 
+
+
+
+  render(){
   return (
     <Reboot>
       <MuiThemeProvider theme={theme}>
         <Router>
-          { isAuthenticated ?
+          { this.state.isAuthenticated ?
             <PageLayout>
             </PageLayout>
             :
             <div>
-              <Route exact path="/" component={Login} onLoginSuccess={this.setAuthenticated} />
+              <Route exact path="/" component={Login} onLoginSuccess={() => this.setState({isAuthenticated : true})} />
             </div>
           }
         </Router>
       </MuiThemeProvider>
     </Reboot>
   );
-}
+}}
 
 ReactDOM.render(<App />, document.getElementById('root'));

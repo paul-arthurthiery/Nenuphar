@@ -29,7 +29,7 @@ export default class Login extends Component {
     const data = await login(this.state.name, this.state.password);
     console.log(data);
     setToken(data.token);
-    this.props.onLoginSuccess(token);
+    this.props.onLoginSuccess();
 
     this.props.history.push("/accueil");
   }

@@ -7,8 +7,13 @@ html, body, #root {
 
 body {
   font-family: sans-serif;
+  background-color: #272938;
 }
 
 a {
   text-decoration: none;
+}
+
+div {
+  height: 100%;
 }
