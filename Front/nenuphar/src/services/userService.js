@@ -9,13 +9,17 @@ export function login(username, password) {
   });
 }
 
-export function checkAuth() {
+export const checkAuth = async () => {
   var token = localStorage.getItem(TOKEN_STORAGE_KEY).toString();
-  postJson("/authenticate", token).then( (data) => {
-    if (data.status == "200"){
+  await postJson("/authenticate", {
+    token: token,
+  }).then( (data) => {
+    console.log(data.status);
+    if (data.status == 200){
+      console.log("status is ok");
       return true;
     }
-    return data.status.toString();
+    return data.status;
   }).catch( () => {
     return false;
   });;

@@ -16,6 +16,7 @@ import TeamMembers from './pages/Student/TeamMembers';
 import TeamMember from './pages/Student/TeamMember';
 import Subject from './pages/Student/Subject';
 import {checkAuth} from './services/userService'
+import Loading from './components/Loading'
 
 
 const theme = createMuiTheme({
@@ -27,15 +28,25 @@ const theme = createMuiTheme({
 
 export class App extends Component {
   state = {
-    isAuthenticated : false
+    isAuthenticated : false,
+    loadingAuthentication : true,
   }
 
+
+
   async componentWillMount(){
+    console.log("loading authentication : " + this.state.loadingAuthentication + ", " + "is authenticated : " +this.state.isAuthenticated);
     console.log(localStorage.getItem("nenuphar_access_token").toString());
-    this.setState({isAuthenticated : checkAuth()});
-    console.log(checkAuth());
-    console.log(this.state.isAuthenticated);
+    this.setState({
+      isAuthenticated : await checkAuth(),
+      loadingAuthentication : false,
+    }, () => {
+      this.props.history.push("/accueil");
+    });
+    console.log("loading authentication : " + this.state.loadingAuthentication + ", " + "is authenticated : " +this.state.isAuthenticated);
+
   }
+
 
 
 
@@ -54,7 +65,10 @@ export class App extends Component {
       <Reboot>
         <MuiThemeProvider theme={theme}>
           <Router>
-            { this.state.isAuthenticated ?
+            { this.state.isLoading ?
+              <Loading></Loading>
+              :
+              this.state.isAuthenticated ?
               <PageLayout>
               </PageLayout>
               :
