@@ -19,6 +19,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
     private LDAPService ldapService;
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
@@ -32,7 +33,7 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent)
     {
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
-        User user = userService.createUser(name, lastName, email, login, password, isRespoAPP, isAdmin, isTutor, isStudent);
+        User user = userService.createUser(name, lastName, email, login, encodedPassword, isRespoAPP, isAdmin, isTutor, isStudent);
         if (user==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -127,5 +128,27 @@ public class UserController {
             return new ResponseEntity<>(test, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/ldap", method = RequestMethod.POST)
+    public ResponseEntity ldap(@RequestBody LoginAttemptDTO dto)
+    {
+        String login = dto.getLogin();
+        String password = dto.getPassword();
+        //return new ResponseEntity<>("login: "+login+" / password : "+password, HttpStatus.OK);
+        LDAP person = null;
+        try
+        {
+            person = ldapService.LDAPget(login, password);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return new ResponseEntity<>("erreur",HttpStatus.BAD_REQUEST);
+        }
+
+
+        if (person == null) return new ResponseEntity<>("y'a personne",HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>("prenom : "+person.getPrenom()+" / "+"nom : "+person.getNom(), HttpStatus.OK);
     }
 }
