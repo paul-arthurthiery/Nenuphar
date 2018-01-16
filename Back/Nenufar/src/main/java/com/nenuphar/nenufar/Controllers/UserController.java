@@ -68,7 +68,7 @@ public class UserController {
         User user = userService.getUserByLogin(login);
 
         if (user != null) {
-            // USER FOUND IN DATABASE
+            // USER FOUND IN THE DATABASE
 
             String valid_password = user.getPassword();
             BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
