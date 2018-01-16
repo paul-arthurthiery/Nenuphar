@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CourseRepository extends CrudRepository<Course, Long> {
-    @Query(value="SELECT * FROM Course WHERE id = (SELECT course_id FROM Skill WHERE id = (SELECT skill_id FROM sub_skill WHERE subskill_id = (SELECT subskill_id FROM graded_sub_skill WHERE user_id = (SELECT id FROM User WHERE uuid = :uuid))))", nativeQuery = true)
+    @Query(value="SELECT * FROM Course WHERE id = (SELECT course_id FROM Skill WHERE id = (SELECT skill_id FROM sub_skill WHERE subskill_id = (SELECT subskill_id FROM graded_sub_skill WHERE user_id = (SELECT id FROM User WHERE uuid = ?1))))", nativeQuery = true)
     List<Course> getCoursesFromUUID(String uuid);
 }
