@@ -54,7 +54,7 @@ public class UserController {
             // user is authenticated
             // TODO perform authentication logic here
             String uuid = UUID.randomUUID().toString();
-            user.setUuid(uuid);
+            userService.generateUUID(user, uuid);
             return new ResponseEntity<>(uuid, HttpStatus.OK);
         }
         
@@ -91,7 +91,8 @@ public class UserController {
         String encodedPassword = new BCryptPasswordEncoder().encode(p_password);
 
         User new_user = userService.createUser(p_prenom, p_nomFamille, p_mail, p_login, encodedPassword,false,false, isTutor, isStudent);
-        String uuid = new_user.getUuid();
+        String uuid = UUID.randomUUID().toString();
+        userService.generateUUID(new_user, uuid);
         return new ResponseEntity<>(uuid, HttpStatus.OK);
     }
 
@@ -121,7 +122,10 @@ public class UserController {
     private ResponseEntity authenticateWithUUID(@RequestBody String uuid)
     {
         User user = userService.getUserByUUID(uuid);
-        if(user==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(user==null) {
+            ResponseEntity test = getUserById(1);
+            return new ResponseEntity<>(test, HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

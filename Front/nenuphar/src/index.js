@@ -31,6 +31,7 @@ export class App extends Component {
   }
 
   async componentWillMount(){
+    console.log(localStorage.getItem("nenuphar_access_token").toString());
     this.setState({isAuthenticated : checkAuth()});
     console.log(this.state.isAuthenticated);
   }
@@ -38,23 +39,33 @@ export class App extends Component {
 
 
 
+
   render(){
-  return (
-    <Reboot>
-      <MuiThemeProvider theme={theme}>
-        <Router>
-          { this.state.isAuthenticated ?
-            <PageLayout>
-            </PageLayout>
-            :
-            <div>
-              <Route exact path="/" component={Login} onLoginSuccess={() => this.setState({isAuthenticated : true})} />
-            </div>
-          }
-        </Router>
-      </MuiThemeProvider>
-    </Reboot>
-  );
-}}
+    const LoginPage = (props) => {
+      return (
+        <Login
+          onLoginSuccess={() => this.setState({isAuthenticated : true})}
+          {...props}
+        />
+      );
+    }
+    return (
+      <Reboot>
+        <MuiThemeProvider theme={theme}>
+          <Router>
+            { this.state.isAuthenticated ?
+              <PageLayout>
+              </PageLayout>
+              :
+
+                <Route exact path="/" render={LoginPage}/>
+              
+            }
+          </Router>
+        </MuiThemeProvider>
+      </Reboot>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));

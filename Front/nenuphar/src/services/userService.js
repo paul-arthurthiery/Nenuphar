@@ -10,7 +10,7 @@ export function login(username, password) {
 }
 
 export function checkAuth() {
-  var token = localStorage.getItem(TOKEN_STORAGE_KEY);
+  var token = localStorage.getItem(TOKEN_STORAGE_KEY).toString();
   postJson("/authenticate", token).then( (data) => {
     if (data.status == "200"){
       return true;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -26,9 +26,8 @@ export default class Login extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const data = await login(this.state.name, this.state.password);
-    console.log(data);
-    setToken(data.token);
+    const response = await login(this.state.name, this.state.password);
+    setToken(response.data);
     this.props.onLoginSuccess();
 
     this.props.history.push("/accueil");

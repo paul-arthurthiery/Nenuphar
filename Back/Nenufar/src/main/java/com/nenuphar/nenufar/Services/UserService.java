@@ -34,4 +34,9 @@ public class UserService {
         user.setPassword(encodedPassword);
         userRepository.save(user);
     }
+
+    public void generateUUID(User user, String uuid) {
+        user.setUuid(uuid);
+        userRepository.save(user);
+    }
 }
