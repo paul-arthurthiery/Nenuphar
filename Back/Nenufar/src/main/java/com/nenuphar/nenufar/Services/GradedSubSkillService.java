@@ -24,11 +24,11 @@ public class GradedSubSkillService
         return gradedsubskill;
     }
 
-    public List<GradedSubSkill> getLastWeekGradedSubSkillFromUUID(String uuid)
+    public List<GradedSubSkill> getLastWeekGradedSubSkillsFromUUID(String uuid)
     {
         try
         {
-            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillFromUUID(uuid);
+            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
         catch(Exception e)

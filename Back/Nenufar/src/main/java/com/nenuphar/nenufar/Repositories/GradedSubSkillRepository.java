@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface GradedSubSkillRepository extends CrudRepository<GradedSubSkill, Long>
 {
     @Query(value="SELECT * FROM graded_sub_skill WHERE user_id = (SELECT id FROM User WHERE uuid = ?1) AND date > (SELECT CURDATE()-7)", nativeQuery = true)
-    List<GradedSubSkill> getLastWeekGradedSubSkillFromUUID(@Param("uuid") String uuid);
+    List<GradedSubSkill> getLastWeekGradedSubSkillsFromUUID(@Param("uuid") String uuid);
 }
