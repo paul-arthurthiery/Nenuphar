@@ -38,13 +38,13 @@ public class UserService {
         return true;
     }
 
-    /* public List<User> getTeamMembersFromUUID(String uuid)
+     public List<User> getTeamMatesFromUUID(String uuid)
     {
         try
         {
             boolean check_uuid = checkUserUUID(uuid);
             if (!check_uuid){ return null; }
-            List<User> members = userRepository.getTeamMembersFromUUID(uuid);
+            List<User> members = userRepository.getTeamMatesFromUUID(uuid);
             return members;
         }
         catch(Exception e)
@@ -54,17 +54,21 @@ public class UserService {
     }
 
     public List<User> getWorkgroupMembersFromUUID(String uuid) {
-        try {
+        try
+        {
             boolean check_uuid = checkUserUUID(uuid);
-            if (!check_uuid) {
+            if (!check_uuid)
+            {
                 return null;
             }
             List<User> members = userRepository.getWorkgroupMembersFromUUID(uuid);
             return members;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return null;
         }
-    } */
+    }
 
     public void changePassword(User user, String password){
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
