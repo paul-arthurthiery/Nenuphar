@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SkillRepository extends CrudRepository<Skill, Long>{
     @Query(value="SELECT * FROM skill WHERE course_id = ?1", nativeQuery = true)
-    List<Skill> getSkillsFromCourseID(int course_id);
+    List<Skill> getSkillsFromCourseID(Long course_id);
 }

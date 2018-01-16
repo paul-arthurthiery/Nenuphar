@@ -24,7 +24,7 @@ public class SubSkillService {
         return subskill;
     }
 
-    public List<SubSkill> getSubSkillsFromSkillID(int skill_id)
+    public List<SubSkill> getSubSkillsFromSkillID(Long skill_id)
     {
         try
         {

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -22,6 +23,20 @@ public class UserController {
     private UserService userService;
     @Autowired
     private LDAPService ldapService;
+
+    @RequestMapping(value = "/teammates/{uuid}", method = RequestMethod.GET)
+    private ResponseEntity getTeamMatesFromUUID(@PathVariable("uuid") String uuid){
+        List<User> teammates = userService.getTeamMatesFromUUID(uuid);
+        if(teammates==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(teammates, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/workgroup_members/{uuid}", method = RequestMethod.GET)
+    private ResponseEntity getWorkgroupMembersFromUUID(@PathVariable("uuid") String uuid){
+        List<User> workgroup_members = userService.getWorkgroupMembersFromUUID(uuid);
+        if(workgroup_members==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(workgroup_members, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     private ResponseEntity getUserById(@PathVariable("id") long id){

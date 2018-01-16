@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class SubSkillController {
 
@@ -19,6 +21,13 @@ public class SubSkillController {
         SubSkill subskill = subSkillService.getSubSkill(id);
         if(subskill==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(subskill, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/subskills/{id}", method = RequestMethod.GET)
+    private ResponseEntity getSubSkillsFromSkillID(@PathVariable("id") Long id){
+        List<SubSkill> subskills = subSkillService.getSubSkillsFromSkillID(id);
+        if(subskills==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(subskills, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/subskill", method = RequestMethod.POST)

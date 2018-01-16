@@ -25,7 +25,7 @@ public class SkillService {
         return skill;
     }
 
-    public List<Skill> getSkillsFromCourseID(int course_id)
+    public List<Skill> getSkillsFromCourseID(Long course_id)
     {
         try
         {
