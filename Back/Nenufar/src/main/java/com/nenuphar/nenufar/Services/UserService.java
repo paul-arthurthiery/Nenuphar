@@ -19,6 +19,7 @@ public class UserService {
     public User getUserByLogin(String login){ return userRepository.findByName(login); }
     public User getUserByUUID(String uuid){ return userRepository.findByUuid(uuid); }
 
+
     public User getPostedUser(User user){ return user;}
 
     public User createUser(String name, String lastName, String email, String login, String password, boolean isRespoAPP, boolean isAdmin, boolean isTutor, boolean isStudent){
@@ -28,6 +29,42 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
+
+
+    public boolean checkUserUUID(String uuid)
+    {
+        User user = userRepository.findByUuid(uuid);
+        if(user == null){return false;}
+        return true;
+    }
+
+    /* public List<User> getTeamMembersFromUUID(String uuid)
+    {
+        try
+        {
+            boolean check_uuid = checkUserUUID(uuid);
+            if (!check_uuid){ return null; }
+            List<User> members = userRepository.getTeamMembersFromUUID(uuid);
+            return members;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+
+    public List<User> getWorkgroupMembersFromUUID(String uuid) {
+        try {
+            boolean check_uuid = checkUserUUID(uuid);
+            if (!check_uuid) {
+                return null;
+            }
+            List<User> members = userRepository.getWorkgroupMembersFromUUID(uuid);
+            return members;
+        } catch (Exception e) {
+            return null;
+        }
+    } */
 
     public void changePassword(User user, String password){
         String encodedPassword = new BCryptPasswordEncoder().encode(password);

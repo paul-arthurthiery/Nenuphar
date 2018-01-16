@@ -109,6 +109,7 @@ public class LDAPService implements Serializable
 			throw (new Exception(messageErreur));
 		}
 
+
 		LDAP response = new LDAP(login, mdp, nom, nomFamille, prenom, type, employeeNumber, mail);
 		return response;
 	}

@@ -46,7 +46,7 @@ public class UserController {
 
         if (user != null) {
             // USER FOUND IN DATABASE
-            
+
             String valid_password = user.getPassword();
             BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
@@ -57,9 +57,9 @@ public class UserController {
             userService.generateUUID(user, uuid);
             return new ResponseEntity<>(uuid, HttpStatus.OK);
         }
-        
+
         // user not found in database :
-            
+
         // HERE MAKE LDAP CHECK
         // TODO LDAP STUFF NOT WORKING YET
         LDAP person = null;
@@ -72,7 +72,7 @@ public class UserController {
 
         if (person == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        
+
         // Create the user in database :
         String p_nom = person.getNom();
         String p_nomFamille = person.getNomFamille();

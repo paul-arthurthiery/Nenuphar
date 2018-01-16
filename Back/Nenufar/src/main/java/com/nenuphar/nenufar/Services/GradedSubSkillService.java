@@ -23,4 +23,18 @@ public class GradedSubSkillService
         gradedsubSkillRepository.save(gradedsubskill);
         return gradedsubskill;
     }
+
+    /*public List<GradedSubSkill> getGradedSubSkillFromUUID(String uuid)
+    {
+        try
+        {
+            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getGradedSubSkillFromUUID(uuid);
+            return gradedSubSkills;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }*/
+
 }

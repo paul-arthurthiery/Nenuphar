@@ -21,4 +21,17 @@ public class CourseService {
         courseRepository.save(course);
         return course;
     }
+
+   /* public List<Course> getCoursesFromUUID(String uuid)
+    {
+        try
+        {
+            List<Course> courses = courseRepository.getCoursesFromUUID(uuid);
+            return courses;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }*/
 }
