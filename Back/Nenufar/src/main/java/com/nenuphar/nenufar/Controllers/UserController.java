@@ -123,7 +123,7 @@ public class UserController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     private ResponseEntity authenticateWithUUID(@RequestBody AuthenticationAttemptDTO dto)
     {
-        String uuid = dto.getUuid();
+        String uuid = dto.getToken();
         //return new ResponseEntity<>(uuid, HttpStatus.OK);
         User user = userService.getUserByUUID(uuid);
         if(user==null) {
