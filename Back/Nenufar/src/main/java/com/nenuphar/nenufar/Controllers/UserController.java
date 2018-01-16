@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.DTO.AuthenticationAttemptDTO;
 import com.nenuphar.nenufar.DTO.LoginAttemptDTO;
 import com.nenuphar.nenufar.Models.LDAP;
 import com.nenuphar.nenufar.Models.User;
@@ -120,12 +121,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    private ResponseEntity authenticateWithUUID(@RequestBody String uuid)
+    private ResponseEntity authenticateWithUUID(@RequestBody AuthenticationAttemptDTO dto)
     {
+        String uuid = dto.getUuid();
+        //return new ResponseEntity<>(uuid, HttpStatus.OK);
         User user = userService.getUserByUUID(uuid);
         if(user==null) {
-            ResponseEntity test = getUserById(1);
-            return new ResponseEntity<>(test, HttpStatus.NOT_FOUND);
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

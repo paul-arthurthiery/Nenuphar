@@ -38,7 +38,7 @@ const menuItems = (
     </Link>
 
 
-    <Link to="/notifications">  
+    <Link to="/notifications">
       <ListItem button>
         <ListItemIcon>
           <NotificationsIcon />

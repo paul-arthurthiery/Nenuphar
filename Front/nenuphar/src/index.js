@@ -33,6 +33,7 @@ export class App extends Component {
   async componentWillMount(){
     console.log(localStorage.getItem("nenuphar_access_token").toString());
     this.setState({isAuthenticated : checkAuth()});
+    console.log(checkAuth());
     console.log(this.state.isAuthenticated);
   }
 

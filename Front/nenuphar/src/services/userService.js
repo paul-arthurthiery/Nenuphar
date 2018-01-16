@@ -15,7 +15,7 @@ export function checkAuth() {
     if (data.status == "200"){
       return true;
     }
-    return false;
+    return data.status.toString();
   }).catch( () => {
     return false;
   });;
