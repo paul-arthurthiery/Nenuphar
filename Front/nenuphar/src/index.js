@@ -74,11 +74,7 @@ export class App extends Component {
               :
 
                 <Route exact path="/" render={LoginPage}/>
-<<<<<<< HEAD
-              
-=======
 
->>>>>>> 6972d2f... Merged with master
             }
           </Router>
         </MuiThemeProvider>

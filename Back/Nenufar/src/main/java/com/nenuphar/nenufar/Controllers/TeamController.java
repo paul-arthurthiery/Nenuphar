@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.DTO.GetIDDTO;
 import com.nenuphar.nenufar.Models.Team;
 import com.nenuphar.nenufar.Services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,12 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @RequestMapping(value = "/team/{id}", method = RequestMethod.GET)
-    private ResponseEntity getTeamById(@PathVariable("id") long id)
+    @RequestMapping(value = "/get_team", method = RequestMethod.POST)
+    private ResponseEntity getTeamById(@RequestBody GetIDDTO dto)
     {
+        Long id = dto.getID();
         Team team = teamService.getTeam(id);
-        if(team==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(team==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
@@ -25,7 +27,7 @@ public class TeamController {
     public ResponseEntity createTeam(@RequestBody int size, String name)
     {
         Team team = teamService.createTeam(size, name);
-        if(team==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        if(team==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
         return new ResponseEntity(team, HttpStatus.OK);
     }
 

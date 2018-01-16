@@ -1,6 +1,7 @@
 package com.nenuphar.nenufar.Controllers;
 
-import com.nenuphar.nenufar.DTO.AuthenticationAttemptDTO;
+import com.nenuphar.nenufar.DTO.GetIDDTO;
+import com.nenuphar.nenufar.DTO.GettokenDTO;
 import com.nenuphar.nenufar.DTO.LoginAttemptDTO;
 import com.nenuphar.nenufar.Models.LDAP;
 import com.nenuphar.nenufar.Models.User;
@@ -24,24 +25,29 @@ public class UserController {
     @Autowired
     private LDAPService ldapService;
 
-    @RequestMapping(value = "/teammates/{uuid}", method = RequestMethod.GET)
-    private ResponseEntity getTeamMatesFromUUID(@PathVariable("uuid") String uuid){
+    @RequestMapping(value = "/get_teammates", method = RequestMethod.POST)
+    private ResponseEntity getTeamMatesFromUUID(@RequestBody GettokenDTO dto)
+    {
+        String uuid = dto.getToken();
         List<User> teammates = userService.getTeamMatesFromUUID(uuid);
-        if(teammates==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(teammates==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(teammates, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/workgroup_members/{uuid}", method = RequestMethod.GET)
-    private ResponseEntity getWorkgroupMembersFromUUID(@PathVariable("uuid") String uuid){
+    @RequestMapping(value = "/get_workgroup_members", method = RequestMethod.POST)
+    private ResponseEntity getWorkgroupMembersFromUUID(@RequestBody GettokenDTO dto)
+    {
+        String uuid = dto.getToken();
         List<User> workgroup_members = userService.getWorkgroupMembersFromUUID(uuid);
-        if(workgroup_members==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(workgroup_members==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(workgroup_members, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    private ResponseEntity getUserById(@PathVariable("id") long id){
+    @RequestMapping(value = "/get_user", method = RequestMethod.POST)
+    private ResponseEntity getUserById(@RequestBody GetIDDTO dto){
+        Long id = dto.getID();
         User user = userService.getUser(id);
-        if(user==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(user==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -136,7 +142,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    private ResponseEntity authenticateWithUUID(@RequestBody AuthenticationAttemptDTO dto)
+    private ResponseEntity authenticateWithUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
         //return new ResponseEntity<>(uuid, HttpStatus.OK);
@@ -165,7 +171,7 @@ public class UserController {
         }
 
 
-        if (person == null) return new ResponseEntity<>("y'a personne",HttpStatus.BAD_REQUEST);
+        if (person == null) {return new ResponseEntity<>("y'a personne",HttpStatus.BAD_REQUEST);}
 
         return new ResponseEntity<>("prenom : "+person.getPrenom()+" / "+"nom : "+person.getNom(), HttpStatus.OK);
     }

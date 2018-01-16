@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.DTO.GetIDDTO;
 import com.nenuphar.nenufar.Models.SubSkill;
 import com.nenuphar.nenufar.Services.SubSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,21 @@ public class SubSkillController {
     @Autowired
     private SubSkillService subSkillService;
 
-    @RequestMapping(value = "/subskill/{id}", method = RequestMethod.GET)
-    private ResponseEntity getSubSkillById(@PathVariable("id") long id)
+    @RequestMapping(value = "/get_subskill", method = RequestMethod.POST)
+    private ResponseEntity getSubSkillById(@RequestBody GetIDDTO dto)
     {
+        Long id = dto.getID();
         SubSkill subskill = subSkillService.getSubSkill(id);
-        if(subskill==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(subskill==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(subskill, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/subskills/{id}", method = RequestMethod.GET)
-    private ResponseEntity getSubSkillsFromSkillID(@PathVariable("id") Long id){
+    @RequestMapping(value = "/get_subskills", method = RequestMethod.POST)
+    private ResponseEntity getSubSkillsFromSkillID(@RequestBody GetIDDTO dto)
+    {
+        Long id = dto.getID();
         List<SubSkill> subskills = subSkillService.getSubSkillsFromSkillID(id);
-        if(subskills==null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(subskills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(subskills, HttpStatus.OK);
     }
 

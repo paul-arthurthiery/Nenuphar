@@ -1,6 +1,7 @@
 package com.nenuphar.nenufar.DTO;
 
-public class AuthenticationAttemptDTO {
+public class GettokenDTO
+{
     private String token;
 
     public String getToken() {
