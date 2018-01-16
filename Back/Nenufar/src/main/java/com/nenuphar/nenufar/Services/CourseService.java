@@ -22,7 +22,7 @@ public class CourseService {
         return course;
     }
 
-   /* public List<Course> getCoursesFromUUID(String uuid)
+    public List<Course> getCoursesFromUUID(String uuid)
     {
         try
         {
@@ -33,5 +33,5 @@ public class CourseService {
         {
             return null;
         }
-    }*/
+    }
 }
