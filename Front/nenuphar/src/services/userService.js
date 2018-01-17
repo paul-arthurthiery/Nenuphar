@@ -10,17 +10,17 @@ export function login(username, password) {
 }
 
 export const checkAuth = async () => {
-  var token = localStorage.getItem(TOKEN_STORAGE_KEY).toString();
-  await postJson("/authenticate", {
-    token: token,
-  }).then( (data) => {
-    console.log(data.status);
-    if (data.status == 200){
-      console.log("status is ok");
-      return true;
+  var token = localStorage.getItem(TOKEN_STORAGE_KEY);
+
+  if (!token) return false;
+
+  return await postJson(
+    "/authenticate", {
+      token: token,
     }
-    return data.status;
-  }).catch( () => {
-    return false;
-  });;
+  ).then(
+    (data) => data.status === 200
+  ).catch(
+    () => false
+  );
 }

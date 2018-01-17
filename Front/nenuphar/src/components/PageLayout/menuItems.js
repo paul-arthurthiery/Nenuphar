@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const menuItems = (
   <div style={{ height: '100%' }}>
-    <Link to="/home">
+    <Link to="/accueil">
       <ListItem button>
         <ListItemIcon>
           <HomeIcon />
