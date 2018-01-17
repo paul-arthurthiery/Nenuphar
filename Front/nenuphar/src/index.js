@@ -56,7 +56,7 @@ class App extends Component {
 
     console.log(this.state)
 
-    // TODO PAT correct background color (use material-ui/colors or whatever)
+    
     return (
       <Reboot>
         <MuiThemeProvider theme={theme}>
