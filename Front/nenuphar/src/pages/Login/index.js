@@ -4,7 +4,7 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 import {login} from '../../services/userService';
-import {setToken} from '../../services/request';
+import {setToken} from '../../services/userService';
 
 import Logo from '../../logo.png';
 import './LoginForm.css';
