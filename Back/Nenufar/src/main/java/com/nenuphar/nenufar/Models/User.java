@@ -140,6 +140,14 @@ public class User
         isStudent = student;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @ManyToMany(mappedBy = "users")
     private Set<Record> records = new HashSet<>();
 
@@ -176,12 +184,16 @@ public class User
         this.teams = teams;
     }
 
-    public String getUuid() {
-        return uuid;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Course> courses = new HashSet<>();
+
+    public Set<Course> getCourses() {
+        return courses;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 
     // standard constructors/getters/setters
