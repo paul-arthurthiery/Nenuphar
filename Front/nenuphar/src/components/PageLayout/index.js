@@ -13,7 +13,6 @@ import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
 import menuItems from './menuItems';
-import {getUserInfo} from '../../services/userService';
 
 const drawerWidth = 280; //px
 
@@ -75,25 +74,11 @@ const styles = theme => ({
 class ResponsiveDrawer extends React.Component {
   state = {
     mobileOpen: false,
-    name: '',
-    lastName: ''
   };
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
-
-  async loadUserInfo() {
-
-  }
-
-  async componentDidMount() {
-    const userInfo = await getUserInfo();
-    this.setState({
-      name: userInfo.name,
-      lastName: userInfo.lastName
-    })
-  }
 
   render() {
     const { classes, theme } = this.props;
@@ -109,7 +94,7 @@ class ResponsiveDrawer extends React.Component {
           </ListItem>
           <ListItem>
             <Typography type="title">
-              {this.state.name + " " + this.state.lastName}
+              Thaul-Arphur Piéry
             </Typography>
           </ListItem>
         </div>

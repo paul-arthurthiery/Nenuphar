@@ -4,20 +4,8 @@ import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import HomeIcon from 'material-ui-icons/Home';
 import FolderSharedIcon from 'material-ui-icons/FolderShared';
 import NotificationsIcon from 'material-ui-icons/Notifications';
-import LockIcon from 'material-ui-icons/Lock';
-
-import {deleToken} from '../../services/userService';
 
 import { Link } from 'react-router-dom';
-
-{/* <Link to="/" >
-  <ListItem button >
-    <ListItemIcon>
-      <LockIcon />
-    </ListItemIcon>
-    <ListItemText primary="Déconnexion" />
-  </ListItem>
-</Link> */}
 
 const menuItems = (
   <div style={{ height: '100%' }}>
@@ -58,9 +46,6 @@ const menuItems = (
         <ListItemText primary="Notifications" />
       </ListItem>
     </Link>
-
-
-
 
   </div>
 );
