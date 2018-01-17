@@ -7,11 +7,12 @@ import com.nenuphar.nenufar.Models.LDAP;
 import com.nenuphar.nenufar.Models.User;
 import com.nenuphar.nenufar.Services.LDAPService;
 import com.nenuphar.nenufar.Services.UserService;
+import com.nenuphar.nenufar.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -142,16 +143,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    private ResponseEntity authenticateWithUUID(@RequestBody GettokenDTO dto)
-    {
+    private User authenticateWithUUID(@RequestBody GettokenDTO dto) {
         String uuid = dto.getToken();
         //return new ResponseEntity<>(uuid, HttpStatus.OK);
         User user = userService.getUserByUUID(uuid);
-        if(user==null) {
-
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found");
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        
+        return user;
     }
 
     @RequestMapping(value = "/ldap", method = RequestMethod.POST)

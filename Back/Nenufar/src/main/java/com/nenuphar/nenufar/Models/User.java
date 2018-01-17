@@ -1,5 +1,7 @@
 package com.nenuphar.nenufar.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,8 +19,13 @@ public class User
     private String lastName;
     private String email;
     private String login;
+    
+    @JsonIgnore
     private String password;
+    
+    @JsonIgnore
     private String uuid;
+    
     private boolean isRespoAPP;
     private boolean isAdmin;
     private boolean isTutor;
