@@ -19,7 +19,3 @@ export function getJson(url) {
 export function postJson(url, body) {
   return request.post(url, body);
 }
-
-export function setToken(token) {
-  localStorage.setItem(TOKEN_STORAGE_KEY, token);
-}
