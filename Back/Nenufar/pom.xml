@@ -6,8 +6,11 @@
 
     <groupId>com.nenuphar.nenufar</groupId>
     <artifactId>Nenufar</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+    <packaging>war</packaging>
 
+    <name>nenuphar</name>
+    <description>Back End of the Nenuphar website</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
