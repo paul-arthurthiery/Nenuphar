@@ -17,6 +17,19 @@ public class SubSkillService {
 
     public SubSkill getPostedSubSkill(SubSkill subSkill){ return subSkill;}
 
+    public SubSkill getSubSkillFromNameAndCourse(String subskill_name, String course_name)
+    {
+        try
+        {
+            SubSkill subskill = getSubSkillFromNameAndCourse(course_name, subskill_name);
+            return subskill;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+
     public SubSkill createSubSkill(String name, int grade)
     {
         SubSkill subskill = new SubSkill(name, grade);

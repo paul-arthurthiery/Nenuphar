@@ -1,6 +1,7 @@
 package com.nenuphar.nenufar.Models;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name="GradedSubSkill")
@@ -9,8 +10,8 @@ public class GradedSubSkill
     @Id
     @GeneratedValue
     private long id;
-
     private int level;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name="subskill_ID")
@@ -27,11 +28,12 @@ public class GradedSubSkill
 
     }
 
-    public GradedSubSkill(int level, SubSkill subSkillID, User userID)
+    public GradedSubSkill(int level, SubSkill subSkillID, User userID, Date date)
     {
         this.level = level; // SET AS NULL BY DEFAULT IN DB ??
         this.subSkillID = subSkillID;
         this.userID = userID;
+        this.date = date;
     }
 
     public long getId()
@@ -70,4 +72,7 @@ public class GradedSubSkill
         this.userID = userID;
     }
 
+    public Date getDate() { return date; }
+
+    public void setDate(Date date) { this.date = date; }
 }

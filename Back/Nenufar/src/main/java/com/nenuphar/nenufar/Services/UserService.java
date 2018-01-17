@@ -16,9 +16,9 @@ public class UserService {
     private UserRepository userRepository;
 
     public User getUser(Long id){ return userRepository.findOne(id); }
-    public User getUserByLogin(String login){ return userRepository.findByName(login); }
+    public User getUserByLogin(String login){ return userRepository.findByLogin(login); }
     public User getUserByUUID(String uuid){ return userRepository.findByUuid(uuid); }
-
+    public User getFromCompleteName(String name, String last_name){ return userRepository.getFromCompleteName(name,last_name);}
 
     public User getPostedUser(User user){ return user;}
 

@@ -7,6 +7,7 @@ import com.nenuphar.nenufar.Repositories.GradedSubSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -19,9 +20,9 @@ public class GradedSubSkillService
 
     public GradedSubSkill getPostedGradedSubSkill(GradedSubSkill gradedsubSkill){ return gradedsubSkill;}
 
-    public GradedSubSkill createGradedSubSkill(int level, SubSkill subSkillID, User userID)
+    public GradedSubSkill createGradedSubSkill(int level, SubSkill subSkillID, User userID, Date date)
     {
-        GradedSubSkill gradedsubskill = new GradedSubSkill(level, subSkillID, userID);
+        GradedSubSkill gradedsubskill = new GradedSubSkill(level, subSkillID, userID, date);
         gradedsubSkillRepository.save(gradedsubskill);
         return gradedsubskill;
     }
@@ -31,6 +32,19 @@ public class GradedSubSkillService
         try
         {
             List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
+            return gradedSubSkills;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+
+    public List<GradedSubSkill> getLastGradedSubSkillsFromUUID(String uuid)
+    {
+        try
+        {
+            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
         catch(Exception e)
