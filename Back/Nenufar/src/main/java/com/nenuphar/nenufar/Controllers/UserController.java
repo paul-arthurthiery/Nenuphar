@@ -74,12 +74,14 @@ public class UserController {
             String valid_password = user.getPassword();
             BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
-
-            // user is authenticated
-            // TODO perform authentication logic here
-            String uuid = UUID.randomUUID().toString();
-            userService.generateUUID(user, uuid);
-            return new ResponseEntity<>(uuid, HttpStatus.OK);
+            if(pwEncoder.matches(password, valid_password)) {
+                // user is authenticated
+                // TODO perform authentication logic here
+                String uuid = UUID.randomUUID().toString();
+                userService.generateUUID(user, uuid);
+                return new ResponseEntity<>(uuid, HttpStatus.OK);
+            }
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
         // user not found in database :
