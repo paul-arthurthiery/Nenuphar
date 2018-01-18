@@ -17,11 +17,11 @@ public class SubSkillService {
 
     public SubSkill getPostedSubSkill(SubSkill subSkill){ return subSkill;}
 
-    public SubSkill getSubSkillFromNameAndCourse(String subskill_name, String course_name)
+    public SubSkill getSubSkillFromNameAndCourse(String course_name, String subskill_name)
     {
         try
         {
-            SubSkill subskill = getSubSkillFromNameAndCourse(course_name, subskill_name);
+            SubSkill subskill = subSkillRepository.getSubSkillFromNameAndCourse(course_name, subskill_name);
             return subskill;
         }
         catch(Exception e)

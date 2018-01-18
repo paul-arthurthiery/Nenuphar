@@ -39,6 +39,6 @@ public class SubSkillController {
     {
         SubSkill subskill = subSkillService.createSubSkill(name, grade);
         if(subskill==null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity(subskill, HttpStatus.OK);
+        return new ResponseEntity<>(subskill, HttpStatus.OK);
     }
 }

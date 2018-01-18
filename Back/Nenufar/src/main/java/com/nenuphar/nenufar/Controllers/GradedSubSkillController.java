@@ -47,7 +47,7 @@ public class GradedSubSkillController
         return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get_last3_gradedsubskills", method = RequestMethod.POST)
+    @RequestMapping(value = "/get_lastgradedsubskills", method = RequestMethod.POST)
     private ResponseEntity getLastGradedSubSkillsFromUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
@@ -66,14 +66,10 @@ public class GradedSubSkillController
         String course_name = dto.getCourseName();
         SubSkill subskill = subSkillService.getSubSkillFromNameAndCourse(course_name, subskill_name);
         int level = dto.getLevel();
-        String response = user.getName()+" "+user.getLastName()+" // "+dto.getCourseName()+"/"+dto.getSubSkillName()+"/"+level;
-        return new ResponseEntity<>(response, HttpStatus.OK);
-        /*
         Calendar calendar = Calendar.getInstance();
         java.sql.Date currentDate = new java.sql.Date(calendar.getTime().getTime());
         GradedSubSkill gradedsubskill = gradedsubSkillService.createGradedSubSkill(level, subskill, user, currentDate);
         if(gradedsubskill==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
-        return new ResponseEntity<>(gradedsubskill.getLevel(), HttpStatus.OK);
-        */
+        return new ResponseEntity<>(gradedsubskill, HttpStatus.OK);
     }
 }
