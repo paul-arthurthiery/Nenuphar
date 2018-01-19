@@ -29,26 +29,33 @@ public class GradedSubSkillService
 
     public List<GradedSubSkill> getLastWeekGradedSubSkillsFromUUID(String uuid)
     {
-        try
-        {
+        try {
             List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             return null;
         }
     }
 
     public List<GradedSubSkill> getLastGradedSubSkillsFromUUID(String uuid)
     {
-        try
-        {
+        try {
             List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
+            return null;
+        }
+    }
+
+    public List<GradedSubSkill> getLastGradedSubSkillsFromCourse(String course_name)
+    {
+        try {
+            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromCourse(course_name);
+            return gradedSubSkills;
+        }
+        catch(Exception e) {
             return null;
         }
     }

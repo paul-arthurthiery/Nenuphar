@@ -24,11 +24,11 @@ public class CourseService {
         return course;
     }
 
-    public List<Course> getCoursesFromUUID(String uuid)
+    public List<Object> getCoursesFromUUID(String uuid)
     {
         try
         {
-            List<Course> courses = courseRepository.getCoursesFromUUID(uuid);
+            List<Object> courses = courseRepository.getCoursesFromUUID(uuid);
             return courses;
         }
         catch(Exception e)

@@ -14,10 +14,6 @@ public class Course
     private String name;
     private int nbrSkills;
 
-    @ManyToOne
-    @JoinColumn(name = "manager_ID")
-    private User managerID;
-
 
     public Course()
     {
@@ -58,14 +54,6 @@ public class Course
     public void setNbrSkills(int nbrSkills)
     {
         this.nbrSkills = nbrSkills;
-    }
-
-    public User getManagerID() {
-        return managerID;
-    }
-
-    public void setManagerID(User managerID) {
-        this.managerID = managerID;
     }
 
     @ManyToMany(cascade = { CascadeType.ALL })

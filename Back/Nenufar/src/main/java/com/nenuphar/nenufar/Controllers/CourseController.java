@@ -30,9 +30,9 @@ public class CourseController {
     private ResponseEntity getCoursesFromUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
-        List<Course> courses = courseService.getCoursesFromUUID(uuid);
+        List<Object> courses = courseService.getCoursesFromUUID(uuid);
         if(courses==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+        return new ResponseEntity<>(courses.toArray(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/course", method = RequestMethod.POST)
@@ -40,6 +40,6 @@ public class CourseController {
     {
         Course course = courseService.createCourse(name, nbrSkills);
         if(course==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
-        return new ResponseEntity(course, HttpStatus.OK);
+        return new ResponseEntity(course.getName(), HttpStatus.OK);
     }
 }

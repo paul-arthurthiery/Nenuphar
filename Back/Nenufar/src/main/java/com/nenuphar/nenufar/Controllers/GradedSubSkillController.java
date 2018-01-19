@@ -56,6 +56,15 @@ public class GradedSubSkillController
         return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/get_lastgradedsubskills_course", method = RequestMethod.POST)
+    private ResponseEntity getLastGradedSubSkillsFromCourse(@RequestBody GettokenDTO dto)
+    {
+        String course_name = dto.getToken();
+        List<GradedSubSkill> gradedsubskills = gradedsubSkillService.getLastGradedSubSkillsFromCourse(course_name);
+        if(gradedsubskills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
+        return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/gradedsubskill", method = RequestMethod.POST)
     public ResponseEntity createGradedSubSkill(@RequestBody GradedSubSkillDTO dto)
     {

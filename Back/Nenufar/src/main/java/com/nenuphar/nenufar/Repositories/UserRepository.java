@@ -21,7 +21,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value="SELECT * FROM User WHERE id = (SELECT user_id from workgroup_user Where workgroup_id= (SELECT workgroup_id FROM workgroup_user WHERE user_id = (SELECT user_id from User WHERE uuid = ?1)))", nativeQuery = true)
     List<User> getWorkgroupMembersFromUUID(@Param("uuid") String uuid);
 
-
-
-
 }
