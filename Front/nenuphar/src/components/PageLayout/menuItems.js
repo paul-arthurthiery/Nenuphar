@@ -4,6 +4,7 @@ import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import HomeIcon from 'material-ui-icons/Home';
 import FolderSharedIcon from 'material-ui-icons/FolderShared';
 import NotificationsIcon from 'material-ui-icons/Notifications';
+import ExitToAppIcon from 'material-ui-icons/ExitToApp';
 
 import { Link } from 'react-router-dom';
 
@@ -44,6 +45,15 @@ const menuItems = (
           <NotificationsIcon />
         </ListItemIcon>
         <ListItemText primary="Notifications" />
+      </ListItem>
+    </Link>
+
+    <Link to="/logout">
+      <ListItem button>
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary="Déconnexion" />
       </ListItem>
     </Link>
 
