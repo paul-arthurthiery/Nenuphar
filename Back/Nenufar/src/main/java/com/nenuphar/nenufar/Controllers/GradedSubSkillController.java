@@ -42,7 +42,7 @@ public class GradedSubSkillController
     private ResponseEntity getLastWeekGradedSubSkillsFromUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
-        List<GradedSubSkill> gradedsubskills = gradedsubSkillService.getLastWeekGradedSubSkillsFromUUID(uuid);
+        List<Object> gradedsubskills = gradedsubSkillService.getLastWeekGradedSubSkillsFromUUID(uuid);
         if(gradedsubskills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
     }
@@ -51,7 +51,7 @@ public class GradedSubSkillController
     private ResponseEntity getLastGradedSubSkillsFromUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
-        List<GradedSubSkill> gradedsubskills = gradedsubSkillService.getLastGradedSubSkillsFromUUID(uuid);
+        List<Object> gradedsubskills = gradedsubSkillService.getLastGradedSubSkillsFromUUID(uuid);
         if(gradedsubskills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
     }
@@ -60,7 +60,7 @@ public class GradedSubSkillController
     private ResponseEntity getLastGradedSubSkillsFromCourse(@RequestBody GettokenDTO dto)
     {
         String course_name = dto.getToken();
-        List<GradedSubSkill> gradedsubskills = gradedsubSkillService.getLastGradedSubSkillsFromCourse(course_name);
+        List<Object> gradedsubskills = gradedsubSkillService.getLastGradedSubSkillsFromCourse(course_name);
         if(gradedsubskills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(gradedsubskills, HttpStatus.OK);
     }

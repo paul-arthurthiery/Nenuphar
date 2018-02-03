@@ -27,10 +27,10 @@ public class GradedSubSkillService
         return gradedsubskill;
     }
 
-    public List<GradedSubSkill> getLastWeekGradedSubSkillsFromUUID(String uuid)
+    public List<Object> getLastWeekGradedSubSkillsFromUUID(String uuid)
     {
         try {
-            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
+            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
         catch(Exception e) {
@@ -38,10 +38,10 @@ public class GradedSubSkillService
         }
     }
 
-    public List<GradedSubSkill> getLastGradedSubSkillsFromUUID(String uuid)
+    public List<Object> getLastGradedSubSkillsFromUUID(String uuid)
     {
         try {
-            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
+            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
             return gradedSubSkills;
         }
         catch(Exception e) {
@@ -49,10 +49,10 @@ public class GradedSubSkillService
         }
     }
 
-    public List<GradedSubSkill> getLastGradedSubSkillsFromCourse(String course_name)
+    public List<Object> getLastGradedSubSkillsFromCourse(String course_name)
     {
         try {
-            List<GradedSubSkill> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromCourse(course_name);
+            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromCourse(course_name);
             return gradedSubSkills;
         }
         catch(Exception e) {
