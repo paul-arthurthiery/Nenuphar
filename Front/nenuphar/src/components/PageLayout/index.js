@@ -12,7 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
-import menuItems from './menuItems';
+import MenuItems from './menuItems';
 import {getUserInfo} from '../../services/userService';
 
 const drawerWidth = 280; //px
@@ -110,7 +110,7 @@ class ResponsiveDrawer extends React.Component {
             </Typography>
           </ListItem>
         </div>
-        <List>{menuItems}</List>
+        <MenuItems />
       </div>
     );
 
