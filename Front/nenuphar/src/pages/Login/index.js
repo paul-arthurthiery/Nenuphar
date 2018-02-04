@@ -43,7 +43,7 @@ export default class Login extends Component {
         <form onSubmit={this.handleSubmit} action="" method="post">
           <TextField className="textfield" placeholder="login ISEP" value={this.state.name} onChange={this.handleNameChange}/>
           <br/>
-          <TextField className="textfield" placeholder="Mot de passe ISEP" onChange={this.handlePasswordChange}/>
+          <TextField className="textfield" type="password" placeholder="Mot de passe ISEP" onChange={this.handlePasswordChange}/>
           <br/>
           <Button className="button" raised={true} type="submit" onClick={this.handleSubmit}>
             Connexion
