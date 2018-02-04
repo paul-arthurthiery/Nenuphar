@@ -149,11 +149,11 @@ public class UserController {
         String uuid = dto.getToken();
         //return new ResponseEntity<>(uuid, HttpStatus.OK);
         User user = userService.getUserByUUID(uuid);
-        
+
         if (user == null) {
             throw new ResourceNotFoundException("User not found");
         }
-        
+
         return user;
     }
 

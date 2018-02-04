@@ -10,7 +10,8 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByLogin(@Param("login") String login);
 
-    User findByUuid(@Param("uuid") String uuid);
+    @Query(value="SELECT * FROM user WHERE uuid = ?1", nativeQuery = true)
+    User getByUuid(@Param("uuid") String uuid);
 
     @Query(value="SELECT * FROM User WHERE name = ?1 AND last_name=?2", nativeQuery = true)
     User getFromCompleteName(@Param("name") String name, @Param("last_name") String last_name);

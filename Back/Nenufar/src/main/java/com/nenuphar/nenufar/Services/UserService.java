@@ -17,7 +17,22 @@ public class UserService {
 
     public User getUser(Long id){ return userRepository.findOne(id); }
     public User getUserByLogin(String login){ return userRepository.findByLogin(login); }
-    public User getUserByUUID(String uuid){ return userRepository.findByUuid(uuid); }
+
+    public User getUserByUUID(String uuid)
+    {
+        User temp = userRepository.getByUuid(uuid);
+        User user = new User();
+        user.setId(temp.getId());
+        user.setLogin(temp.getLogin());
+        user.setAdmin(temp.isAdmin());
+        user.setEmail(temp.getEmail());
+        user.setLastName(temp.getLastName());
+        user.setName(temp.getName());
+        user.setPassword(temp.getPassword());
+        user.setRespoAPP(temp.isRespoAPP());
+        user.setStudent(temp.isStudent());
+        return user;
+    }
     public User getFromCompleteName(String name, String last_name){ return userRepository.getFromCompleteName(name,last_name);}
 
     public User getPostedUser(User user){ return user;}
@@ -33,7 +48,7 @@ public class UserService {
 
     public boolean checkUserUUID(String uuid)
     {
-        User user = userRepository.findByUuid(uuid);
+        User user = getUserByUUID(uuid);
         if(user == null){return false;}
         return true;
     }
