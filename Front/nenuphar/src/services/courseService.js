@@ -14,7 +14,7 @@ export const getCourses = async() => {
     (response) => {
       console.log(response);
       let courses = [];
-      if(response.data.length == 0 || response.data.length>20) {
+      if(response.data.length == 0) {
         console.log("no courses in response");
         courses = ["Matière 1", "Matière 2", "Matière 3"];
       }
