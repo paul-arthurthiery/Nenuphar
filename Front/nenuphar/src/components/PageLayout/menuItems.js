@@ -1,14 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 import HomeIcon from 'material-ui-icons/Home';
 import FolderSharedIcon from 'material-ui-icons/FolderShared';
 import NotificationsIcon from 'material-ui-icons/Notifications';
+import {getCourses} from '../../services/courseService';
+import {deleToken} from '../../services/userService';
 import ExitToAppIcon from 'material-ui-icons/ExitToApp';
+import Loading from '../../components/Loading';
+
 
 import { Link } from 'react-router-dom';
 
-const menuItems = (
+
+export default class MenuItems extends Component {
+  state = {
+    loading: false,
+    courseArray: []
+  };
+
+
+async componentDidMount(){
+  this.setState({loading: true})
+  var courseArray = await getCourses();
+  this.setState({ courseArray: courseArray});
+  this.setState({loading: false})
+
+}
+
+logout = () => {
+  deleToken();
+  this.props.history.push("/");
+}
+
+
+render(){
+  return(
   <div style={{ height: '100%' }}>
     <Link to="/accueil">
       <ListItem button>
@@ -19,24 +46,22 @@ const menuItems = (
       </ListItem>
     </Link>
 
-    <Link to="/subject">
-      <ListItem button>
-        <ListItemIcon>
-          <FolderSharedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Matière 1" />
-      </ListItem>
-    </Link>
+    {
+      this.state.loading ?
+        <Loading />
+      :
+      this.state.courseArray.map((course) => (
+        <Link to={'/'+course}>
+          <ListItem button>
+            <ListItemIcon>
+              <FolderSharedIcon />
+            </ListItemIcon>
+            <ListItemText primary={course} />
+          </ListItem>
+        </Link>
+      ))
+    }
 
-
-    <Link to="/subject">
-      <ListItem button>
-        <ListItemIcon>
-          <FolderSharedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Matière 2" />
-      </ListItem>
-    </Link>
 
 
     <Link to="/notifications">
@@ -48,7 +73,7 @@ const menuItems = (
       </ListItem>
     </Link>
 
-    <Link to="/logout">
+    <Link to="/" onClick={this.logout}>
       <ListItem button>
         <ListItemIcon>
           <ExitToAppIcon />
@@ -59,5 +84,4 @@ const menuItems = (
 
   </div>
 );
-
-export default menuItems;
+}}
