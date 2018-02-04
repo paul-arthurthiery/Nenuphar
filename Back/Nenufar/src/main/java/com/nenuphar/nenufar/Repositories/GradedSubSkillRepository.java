@@ -19,6 +19,6 @@ public interface GradedSubSkillRepository extends CrudRepository<GradedSubSkill,
     @Query(value="SELECT * FROM graded_sub_skill WHERE subskill_id =(SELECT id FROM subskill WHERE course_id = (SELECT id FROM course WHERE name = ?1)) ", nativeQuery = true)
     List<GradedSubSkill> getLastGradedSubSkillsFromCourse(@Param("name") String course_name);
 
-    @Query(value="SELECT * FROM graded_sub_skill WHERE subskill_id = ?1 AND user_id = (SELECT id FROM user WHERE uuid = ?2)", nativeQuery = true)
+    @Query(value="SELECT * FROM graded_sub_skill WHERE subskill_id = ?1 AND user_id = (SELECT id FROM user WHERE uuid = ?2) ORDER BY date DESC LIMIT 1", nativeQuery = true)
     GradedSubSkill getGradedSubSkillFromSubskillUuid(@Param("subskill_id") long subskill_id, @Param("uuid") String uuid);
 }
