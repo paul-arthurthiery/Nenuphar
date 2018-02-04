@@ -37,7 +37,7 @@ logout = () => {
 
 render(){
   return(
-  <div style={{ height: '100%' }}>
+  <div>
     <Link to="/accueil">
       <ListItem button>
         <ListItemIcon>
