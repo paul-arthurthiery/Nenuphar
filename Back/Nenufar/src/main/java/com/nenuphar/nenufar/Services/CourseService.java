@@ -13,7 +13,11 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
-    public Course getCourse(Long id){ return courseRepository.findOne(id);}
+    public Course getCourse(Long id)
+    {
+        Course temp = courseRepository.findOne(id);
+        return infiniteLoopFix(temp);
+    }
 
     public Course getPostedCourse(Course course){ return course;}
 
@@ -24,16 +28,38 @@ public class CourseService {
         return course;
     }
 
-    public List<Object> getCoursesFromUUID(String uuid)
+    public List<Course> getCoursesFromUUID(String uuid)
     {
         try
         {
-            List<Object> courses = courseRepository.getCoursesFromUUID(uuid);
-            return courses;
+            List<Course> courses = courseRepository.getCoursesFromUUID(uuid);
+            return infiniteListProcess(courses);
         }
         catch(Exception e)
         {
             return null;
         }
+    }
+
+    private Course infiniteLoopFix(Course temp)
+    {
+        Course course = new Course();
+        course.setId(temp.getId());
+        course.setManager(temp.getManagerID().getId());
+        course.setName(temp.getName());
+        course.setNbrSkills(temp.getNbrSkills());
+        course.setUsers(temp.getUsers());
+        return course;
+    }
+
+    private List<Course> infiniteListProcess(List<Course> courses)
+    {
+        for(int i=0; i<courses.size(); i++)
+        {
+            Course temp = courses.get(i);
+            Course course = infiniteLoopFix(temp);
+            courses.set(i, course);
+        }
+        return courses;
     }
 }

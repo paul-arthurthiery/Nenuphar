@@ -30,7 +30,7 @@ public class CourseController {
     private ResponseEntity getCoursesFromUUID(@RequestBody GettokenDTO dto)
     {
         String uuid = dto.getToken();
-        List<Object> courses = courseService.getCoursesFromUUID(uuid);
+        List<Course> courses = courseService.getCoursesFromUUID(uuid);
         if(courses==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(courses.toArray(), HttpStatus.OK);
     }

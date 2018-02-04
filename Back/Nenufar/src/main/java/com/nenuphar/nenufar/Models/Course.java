@@ -13,6 +13,11 @@ public class Course
     private long id;
     private String name;
     private int nbrSkills;
+    private long manager;
+
+    @ManyToOne
+    @JoinColumn(name="manager_id")
+    private User managerID;
 
 
     public Course()
@@ -71,4 +76,12 @@ public class Course
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    public long getManager() { return manager; }
+
+    public void setManager(long manager) { this.manager = manager; }
+
+    public User getManagerID() { return managerID; }
+
+    public void setManagerID(User managerID) { this.managerID = managerID; }
 }
