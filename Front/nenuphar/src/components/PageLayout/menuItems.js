@@ -5,6 +5,7 @@ import HomeIcon from 'material-ui-icons/Home';
 import FolderSharedIcon from 'material-ui-icons/FolderShared';
 import NotificationsIcon from 'material-ui-icons/Notifications';
 import {getCourses} from '../../services/courseService';
+import {deleToken} from '../../services/userService';
 import ExitToAppIcon from 'material-ui-icons/ExitToApp';
 import Loading from '../../components/Loading';
 
@@ -25,6 +26,11 @@ async componentDidMount(){
   this.setState({ courseArray: courseArray});
   this.setState({loading: false})
 
+}
+
+logout = () => {
+  deleToken();
+  this.props.history.push("/");
 }
 
 
@@ -67,7 +73,7 @@ render(){
       </ListItem>
     </Link>
 
-    <Link to="/logout">
+    <Link to="/" onClick={this.logout}>
       <ListItem button>
         <ListItemIcon>
           <ExitToAppIcon />
