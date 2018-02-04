@@ -1,10 +1,16 @@
 package com.nenuphar.nenufar.Services;
 
 import com.nenuphar.nenufar.Models.Course;
+import com.nenuphar.nenufar.Models.GradedSubSkill;
+import com.nenuphar.nenufar.Models.Skill;
+import com.nenuphar.nenufar.Models.SubSkill;
 import com.nenuphar.nenufar.Repositories.CourseRepository;
+import com.nenuphar.nenufar.Repositories.SkillRepository;
+import com.nenuphar.nenufar.Repositories.SubSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,6 +18,12 @@ public class CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private SkillService skillService;
+    @Autowired
+    private SubSkillService subSkillService;
+    @Autowired
+    private GradedSubSkillService gradedSubSkillService;
 
     public Course getCourse(Long id)
     {
@@ -41,6 +53,36 @@ public class CourseService {
         }
     }
 
+    public ArrayList<Object> getAllAboutSkillsFromIDUuid(long course_id, String uuid)
+    {
+        List<Skill> skills = skillService.getSkillsFromCourseID(course_id);
+        ArrayList<List<SubSkill>> subskills = new ArrayList<>();
+        for(int i=0; i<skills.size(); i++)
+        {
+            List<SubSkill> subskill = subSkillService.getSubSkillsFromSkillID(skills.get(i).getId());
+            subskills.add(subskill);
+        }
+        ArrayList<ArrayList<GradedSubSkill>> gradedsubskills = new ArrayList<>();
+        for(int j=0; j<subskills.size(); j++)
+        {
+            ArrayList<GradedSubSkill> temp = new ArrayList<>();
+            for(int k=0; k<subskills.get(j).size(); k++)
+            {
+                GradedSubSkill gradedsubskill = gradedSubSkillService.getGradedSubSkillFromSubskillUuid(subskills.get(j).get(k).getId(),uuid);
+                temp.add(gradedsubskill);
+            }
+            gradedsubskills.add(temp);
+        }
+        ArrayList<Object> result = new ArrayList<>();
+        result.add(skills);
+        result.add(subskills);
+        result.add(gradedsubskills);
+        return result;
+    }
+
+
+
+
     private Course infiniteLoopFix(Course temp)
     {
         Course course = new Course();
@@ -62,4 +104,5 @@ public class CourseService {
         }
         return courses;
     }
+
 }

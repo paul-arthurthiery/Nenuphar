@@ -1,5 +1,6 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.nenuphar.nenufar.DTO.GetAllAboutCourseDTO;
 import com.nenuphar.nenufar.DTO.GetIDDTO;
 import com.nenuphar.nenufar.DTO.GettokenDTO;
 import com.nenuphar.nenufar.Models.Course;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,6 +42,16 @@ public class CourseController {
     {
         Course course = courseService.createCourse(name, nbrSkills);
         if(course==null) {return new ResponseEntity(HttpStatus.BAD_REQUEST);}
-        return new ResponseEntity(course.getName(), HttpStatus.OK);
+        return new ResponseEntity<>(course.getName(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get_all", method = RequestMethod.POST)
+    public ResponseEntity getAllAboutSkillsFromIDUuid(@RequestBody GetAllAboutCourseDTO dto)
+    {
+        long course_id = dto.getCourse_id();
+        String uuid = dto.getUuid();
+        ArrayList<Object> everything = courseService.getAllAboutSkillsFromIDUuid(course_id,uuid);
+        if(everything==null){ return new ResponseEntity(HttpStatus.BAD_REQUEST); }
+        return new ResponseEntity<>(everything, HttpStatus.OK);
     }
 }

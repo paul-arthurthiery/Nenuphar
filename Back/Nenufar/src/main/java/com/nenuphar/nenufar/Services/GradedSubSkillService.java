@@ -60,6 +60,12 @@ public class GradedSubSkillService
         }
     }
 
+    public GradedSubSkill getGradedSubSkillFromSubskillUuid(long subskill_id, String uuid)
+    {
+        GradedSubSkill temp = gradedsubSkillRepository.getGradedSubSkillFromSubskillUuid(subskill_id,uuid);
+        return infiniteLoopFix(temp);
+    }
+
     private GradedSubSkill infiniteLoopFix(GradedSubSkill temp)
     {
         GradedSubSkill gradedsubskill = new GradedSubSkill();
