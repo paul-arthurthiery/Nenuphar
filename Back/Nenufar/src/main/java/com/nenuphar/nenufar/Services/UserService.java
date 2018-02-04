@@ -18,9 +18,8 @@ public class UserService {
     public User getUser(Long id){ return userRepository.findOne(id); }
     public User getUserByLogin(String login){ return userRepository.findByLogin(login); }
 
-    public User getUserByUUID(String uuid)
+    private User infiniteLoopFix(User temp)
     {
-        User temp = userRepository.getByUuid(uuid);
         User user = new User();
         user.setId(temp.getId());
         user.setLogin(temp.getLogin());
@@ -33,7 +32,19 @@ public class UserService {
         user.setStudent(temp.isStudent());
         return user;
     }
-    public User getFromCompleteName(String name, String last_name){ return userRepository.getFromCompleteName(name,last_name);}
+
+    public User getUserByUUID(String uuid)
+    {
+        User temp = userRepository.getByUuid(uuid);
+        User user = infiniteLoopFix(temp);
+        return user;
+    }
+    public User getFromCompleteName(String name, String last_name)
+    {
+        User temp = userRepository.getFromCompleteName(name,last_name);
+        User user = infiniteLoopFix(temp);
+        return user;
+    }
 
     public User getPostedUser(User user){ return user;}
 
@@ -60,6 +71,12 @@ public class UserService {
             boolean check_uuid = checkUserUUID(uuid);
             if (!check_uuid){ return null; }
             List<User> members = userRepository.getTeamMatesFromUUID(uuid);
+            for(int i=0; i<members.size(); i++)
+            {
+                User temp = members.get(i);
+                User user = infiniteLoopFix(temp);
+                members.set(i,user);
+            }
             return members;
         }
         catch(Exception e)
@@ -77,6 +94,12 @@ public class UserService {
                 return null;
             }
             List<User> members = userRepository.getWorkgroupMembersFromUUID(uuid);
+            for(int i=0; i<members.size(); i++)
+            {
+                User temp = members.get(i);
+                User user = infiniteLoopFix(temp);
+                members.set(i,user);
+            }
             return members;
         }
         catch (Exception e)

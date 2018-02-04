@@ -15,6 +15,7 @@ public class Workgroup
 
     private String name;
     private int Size;
+    private long teacher;
 
     @ManyToOne
     @JoinColumn(name = "teacher_ID")
@@ -78,4 +79,11 @@ public class Workgroup
         this.users = users;
     }
 
+    public long getTeacher() { return teacher; }
+
+    public void setTeacher(long teacher) { this.teacher = teacher; }
+
+    public User getTeacherID() { return teacherID; }
+
+    public void setTeacherID(User teacherID) { this.teacherID = teacherID; }
 }

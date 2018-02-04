@@ -1,5 +1,7 @@
 package com.nenuphar.nenufar.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nenuphar.nenufar.DTO.GetIDDTO;
 import com.nenuphar.nenufar.Models.Skill;
 import com.nenuphar.nenufar.Services.SkillService;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,12 +30,14 @@ public class SkillController {
     }
 
     @RequestMapping(value = "/get_skills_from_course", method = RequestMethod.POST)
-    private ResponseEntity getSkillsFromCourseID(@RequestBody GetIDDTO dto)
+    private ResponseEntity getSkillsFromCourseID(@RequestBody GetIDDTO dto) throws JsonProcessingException
     {
         Long id = dto.getID();
-        List<Skill> skill = skillService.getSkillsFromCourseID(id);
-        if(skill==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
-        return new ResponseEntity<>(skill, HttpStatus.OK);
+        List<Skill> skills = skillService.getSkillsFromCourseID(id);
+        if(skills==null) {return new ResponseEntity(HttpStatus.NOT_FOUND);}
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(skills);
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/skill", method = RequestMethod.POST)

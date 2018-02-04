@@ -15,6 +15,7 @@ public class Skill
     private String name;
     private int nbrSubSkills;
     private Date recommendedWeek; //Semaine recommmandée
+    private long course;
 
     @ManyToOne
     @JoinColumn(name = "course_ID")
@@ -81,4 +82,8 @@ public class Skill
     public void setCourseID(Course courseID) {
         this.courseID = courseID;
     }
+
+    public long getCourse() { return course; }
+
+    public void setCourse(long course) { this.course = course; }
 }

@@ -12,6 +12,7 @@ public class GradedSubSkill
     private long id;
     private int level;
     private Date date;
+    private long subskill, user;
 
     @ManyToOne
     @JoinColumn(name="subskill_ID")
@@ -75,4 +76,12 @@ public class GradedSubSkill
     public Date getDate() { return date; }
 
     public void setDate(Date date) { this.date = date; }
+
+    public long getSubskill() { return subskill; }
+
+    public void setSubskill(long subskill) { this.subskill = subskill; }
+
+    public long getUser() { return user; }
+
+    public void setUser(long user) { this.user = user; }
 }

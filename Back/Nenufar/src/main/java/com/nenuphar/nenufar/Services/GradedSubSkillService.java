@@ -27,36 +27,58 @@ public class GradedSubSkillService
         return gradedsubskill;
     }
 
-    public List<Object> getLastWeekGradedSubSkillsFromUUID(String uuid)
+    public List<GradedSubSkill> getLastWeekGradedSubSkillsFromUUID(String uuid)
     {
         try {
-            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
-            return gradedSubSkills;
+            List<GradedSubSkill> temp = gradedsubSkillRepository.getLastWeekGradedSubSkillsFromUUID(uuid);
+            return infiniteListProcess(temp);
         }
         catch(Exception e) {
             return null;
         }
     }
 
-    public List<Object> getLastGradedSubSkillsFromUUID(String uuid)
+    public List<GradedSubSkill> getLastGradedSubSkillsFromUUID(String uuid)
     {
         try {
-            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
-            return gradedSubSkills;
+            List<GradedSubSkill> temp = gradedsubSkillRepository.getLastGradedSubSkillsFromUUID(uuid);
+            return infiniteListProcess(temp);
         }
         catch(Exception e) {
             return null;
         }
     }
 
-    public List<Object> getLastGradedSubSkillsFromCourse(String course_name)
+    public List<GradedSubSkill> getLastGradedSubSkillsFromCourse(String course_name)
     {
         try {
-            List<Object> gradedSubSkills = gradedsubSkillRepository.getLastGradedSubSkillsFromCourse(course_name);
-            return gradedSubSkills;
+            List<GradedSubSkill> temp = gradedsubSkillRepository.getLastGradedSubSkillsFromCourse(course_name);
+            return infiniteListProcess(temp);
         }
         catch(Exception e) {
             return null;
         }
+    }
+
+    private GradedSubSkill infiniteLoopFix(GradedSubSkill temp)
+    {
+        GradedSubSkill gradedsubskill = new GradedSubSkill();
+        gradedsubskill.setId(temp.getId());
+        gradedsubskill.setDate(temp.getDate());
+        gradedsubskill.setLevel(temp.getLevel());
+        gradedsubskill.setSubskill(temp.getSubSkillID().getId());
+        gradedsubskill.setUser(temp.getUserID().getId());
+        return gradedsubskill;
+    }
+
+    private List<GradedSubSkill> infiniteListProcess(List<GradedSubSkill> gradedsubskills)
+    {
+        for(int i=0; i<gradedsubskills.size(); i++)
+        {
+            GradedSubSkill temp = gradedsubskills.get(i);
+            GradedSubSkill gradedsubskill = infiniteLoopFix(temp);
+            gradedsubskills.set(i,gradedsubskill);
+        }
+        return gradedsubskills;
     }
 }

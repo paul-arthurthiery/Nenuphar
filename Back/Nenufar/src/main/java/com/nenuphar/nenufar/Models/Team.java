@@ -15,6 +15,7 @@ public class Team
 
     private int size;
     private String name;
+    private long workgroup;
 
     @ManyToOne
     @JoinColumn(name = "workgroup_ID")
@@ -86,4 +87,7 @@ public class Team
         this.users = users;
     }
 
+    public long getWorkgroup() { return workgroup; }
+
+    public void setWorkgroup(long workgroup) { this.workgroup = workgroup; }
 }

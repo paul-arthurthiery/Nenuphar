@@ -16,6 +16,7 @@ public class Record
 
     private int nbrCourses;
     private Date deadlines;
+    private long course;
 
 
 
@@ -91,4 +92,7 @@ public class Record
         this.users = users;
     }
 
+    public long getCourse() { return course; }
+
+    public void setCourse(long course) { this.course = course; }
 }
