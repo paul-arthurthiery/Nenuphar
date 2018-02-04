@@ -6,19 +6,24 @@ import FolderSharedIcon from 'material-ui-icons/FolderShared';
 import NotificationsIcon from 'material-ui-icons/Notifications';
 import {getCourses} from '../../services/courseService';
 import ExitToAppIcon from 'material-ui-icons/ExitToApp';
+import Loading from '../../components/Loading';
 
 
 import { Link } from 'react-router-dom';
 
 
 export default class MenuItems extends Component {
-  state = { courseArray: []};
+  state = {
+    loading: false,
+    courseArray: []
+  };
 
 
 async componentDidMount(){
+  this.setState({loading: true})
   var courseArray = await getCourses();
   this.setState({ courseArray: courseArray});
-  console.log(this.state.courseArray);
+  this.setState({loading: false})
 
 }
 
@@ -35,16 +40,21 @@ render(){
       </ListItem>
     </Link>
 
-    {this.state.courseArray.map((course) => (
-      <Link to={'/'+course}>
-        <ListItem button>
-          <ListItemIcon>
-            <FolderSharedIcon />
-          </ListItemIcon>
-          <ListItemText primary={course} />
-        </ListItem>
-      </Link>
-    ))}
+    {
+      this.state.loading ?
+        <Loading />
+      :
+      this.state.courseArray.map((course) => (
+        <Link to={'/'+course}>
+          <ListItem button>
+            <ListItemIcon>
+              <FolderSharedIcon />
+            </ListItemIcon>
+            <ListItemText primary={course} />
+          </ListItem>
+        </Link>
+      ))
+    }
 
 
 
