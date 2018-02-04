@@ -13,22 +13,32 @@ import PersonIcon from 'material-ui-icons/Person';
 import SubjectGraphMockup from '../../../components/SubjectGraphMockup';
 import PageLayout from '../../../components/PageLayout';
 import Loading from '../../../components/Loading';
+import {getRecentSubSkills} from '../../../services/courseService';
 
 export default class StudentHome extends Component {
   state = {
     loading: false,
-    data: [666,666,666,666]
+    data: [],
+    colors: ['#2ecc71', '#e74c3c']
   };
 
   async componentDidMount () {
     this.setState({ loading: true });
 
     // fetch data here calling a service :
-    await (async () => new Promise(res => setTimeout(() => res(), 1000)))();
+    this.loadRecentSubSkills();
 
     // TDDO update this.state.data:
     this.setState({ loading: false });
   }
+
+   loadRecentSubSkills = async () => {
+    var recentSubSkills = await getRecentSubSkills();
+    this.setState({ data: recentSubSkills});
+    console.log(this.state.data[0][1]);
+  }
+
+
 
   render() {
     return (
@@ -42,8 +52,18 @@ export default class StudentHome extends Component {
               {
                 this.state.data.map((_, i) => {
                   return (
-                    <Grid item xs={12} sm={6} key={i} style={{ textAlign: i % 2 == 0 ? 'right' : 'left' }}>
-                      <Doughnut />
+                    <Grid item xs={12} sm={6} key={i} style={{color: 'white', textAlign: 'center'}}>
+                      <h3 >{this.state.data[i][0]}</h3>
+                      <Doughnut  data={[
+                        {
+                          value: this.state.data[i][1],
+                          color: this.state.colors[0]
+                        }, {
+                          value: 5-this.state.data[i][1],
+                          color: this.state.colors[1]
+                        }
+                      ]} />
+                      <h3 >{this.state.data[i][1]+"/5"}</h3>
                     </Grid>
                   );
                 })

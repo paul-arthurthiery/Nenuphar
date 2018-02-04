@@ -14,6 +14,7 @@ import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
 import MenuItems from './menuItems';
 import {getUserInfo} from '../../services/userService';
+import AccountCircle from 'material-ui-icons/AccountCircle';
 
 const drawerWidth = 280; //px
 
@@ -101,7 +102,7 @@ class ResponsiveDrawer extends React.Component {
           <ListItem>
           <Avatar
             alt="Taul-Arphur Piéry"
-            src="https://pbs.twimg.com/profile_images/948650214579044352/YAyu__6g_400x400.jpg"
+            src="https://i.vimeocdn.com/portrait/58832_300x300"
             className={classes.avatar}/>
           </ListItem>
           <ListItem>
