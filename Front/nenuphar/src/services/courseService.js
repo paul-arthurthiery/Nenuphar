@@ -43,10 +43,19 @@ export const getRecentSubSkills = async() => {
   ).then(
     (response) => {
       let recentSubSkills = [];
-      let mockSubSkills = [[1, "4/02/2018", 2, "First SubSkill"], [2, "4/02/2018", 5, "Second SubSkill"], [3, "4/02/2018", 3, "Third SubSkill"], [4, "4/02/2018", 4, "Fourth SubSkill"]];
+      let mockResponse = [[1, "4/02/2018", 2, "First SubSkill"], [2, "4/02/2018", 5, "Second SubSkill"], [3, "4/02/2018", 3, "Third SubSkill"], [4, "4/02/2018", 4, "Fourth SubSkill"]];
       if(response.data.length == 0) {
-
+        response.data = mockResponse;
       }
+      response.data.forEach( function(element) {
+        recentSubSkills.push([element[3], element[2]]);
+      });
+      console.log(recentSubSkills);
+      return recentSubSkills;
     }
-  )
+  ).catch(
+    () => {
+      return false;
+    }
+  );
 }
