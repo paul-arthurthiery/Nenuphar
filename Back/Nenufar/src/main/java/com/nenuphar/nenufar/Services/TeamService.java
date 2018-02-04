@@ -34,7 +34,7 @@ public class TeamService {
         team.setId(temp.getId());
         team.setName(temp.getName());
         team.setSize(temp.getSize());
-        team.setUsers(temp.getUsers());
+        //team.setUsers(temp.getUsers());
         team.setWorkgroup(temp.getWorkgroupID().getId());
         return team;
     }

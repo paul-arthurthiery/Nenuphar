@@ -48,7 +48,7 @@ public class CourseService {
         course.setManager(temp.getManagerID().getId());
         course.setName(temp.getName());
         course.setNbrSkills(temp.getNbrSkills());
-        course.setUsers(temp.getUsers());
+        //course.setUsers(temp.getUsers());
         return course;
     }
 

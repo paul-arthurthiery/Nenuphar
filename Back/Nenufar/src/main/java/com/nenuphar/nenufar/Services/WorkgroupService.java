@@ -35,7 +35,7 @@ public class WorkgroupService
         workgroup.setId(temp.getId());
         workgroup.setName(temp.getName());
         workgroup.setSize(temp.getSize());
-        workgroup.setUsers(temp.getUsers());
+        //workgroup.setUsers(temp.getUsers());
         workgroup.setTeacher(temp.getTeacherID().getId());
         return workgroup;
     }

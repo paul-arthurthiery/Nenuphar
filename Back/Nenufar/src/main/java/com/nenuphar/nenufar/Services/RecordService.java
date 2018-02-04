@@ -35,7 +35,7 @@ public class RecordService {
         record.setId(temp.getId());
         record.setDeadlines(temp.getDeadlines());
         record.setNbrCourses(temp.getNbrCourses());
-        record.setUsers(temp.getUsers());
+        //record.setUsers(temp.getUsers());
         record.setCourse(temp.getCourseID().getId());
         return record;
     }
