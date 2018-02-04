@@ -24,6 +24,7 @@ async componentDidMount(){
   this.setState({loading: true})
   var courseArray = await getCourses();
   this.setState({ courseArray: courseArray});
+  console.log(courseArray);
   this.setState({loading: false})
 
 }

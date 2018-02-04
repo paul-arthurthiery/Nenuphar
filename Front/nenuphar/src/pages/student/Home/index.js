@@ -5,6 +5,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
+import Doughnut from '../../../components/SkillGraph';
 
 import PersonIcon from 'material-ui-icons/Person';
 
@@ -42,7 +43,7 @@ export default class StudentHome extends Component {
                 this.state.data.map((_, i) => {
                   return (
                     <Grid item xs={12} sm={6} key={i} style={{ textAlign: i % 2 == 0 ? 'right' : 'left' }}>
-                      <SubjectGraphMockup />
+                      <Doughnut />
                     </Grid>
                   );
                 })
