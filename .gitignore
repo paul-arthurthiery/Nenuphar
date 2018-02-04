@@ -7,4 +7,4 @@ Back/Nenufar/src/main/resources/application.yml
 Back/Nenufar/target/
 Back/Nenufar/target/*
 Front/nenuphar/test.*
-Front/nenuphar/src/services
+Front/nenuphar/src/services/request.js

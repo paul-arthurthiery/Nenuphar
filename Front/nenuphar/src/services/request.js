@@ -3,7 +3,7 @@ import axios from 'axios';
 const TOKEN_STORAGE_KEY = "nenuphar_access_token";
 
 const request = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'http://localhost:8000',
   timeout: 1000,
   headers: {}
 });
