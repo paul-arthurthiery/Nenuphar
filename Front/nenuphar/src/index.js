@@ -54,9 +54,8 @@ class App extends Component {
       );
     }
 
-    console.log(this.state)
 
-    
+
     return (
       <Reboot>
         <MuiThemeProvider theme={theme}>
@@ -70,7 +69,7 @@ class App extends Component {
                 this.state.isAuthenticated ?
                   <PageLayout>
                     <Route path="/accueil" component={StudentHome} />
-                    <Route path="/subject" component={Subject} />
+                    <Route path="/subject/:subject" component={Subject} />
                     <Route path="/team/member/:id" component={TeamMember} />
                     <Route exact path="/team" component={TeamMembers} />
                   </PageLayout>

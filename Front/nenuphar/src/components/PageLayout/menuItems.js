@@ -23,15 +23,13 @@ export default class MenuItems extends Component {
 async componentDidMount(){
   this.setState({loading: true})
   var courseArray = await getCourses();
-  this.setState({ courseArray: courseArray});
-  console.log(courseArray);
-  this.setState({loading: false})
+  this.setState({ courseArray: courseArray, loading: false});
 
 }
 
 logout = () => {
   deleToken();
-  this.props.history.push("/");
+  this.props.history.replace("/");
 }
 
 
@@ -51,13 +49,13 @@ render(){
       this.state.loading ?
         <Loading />
       :
-      this.state.courseArray.map((course) => (
-        <Link to={'/'+course}>
+      this.state.courseArray.map((courseInfo) => (
+        <Link to={'/subject/'+courseInfo.name} key={courseInfo.name.toString()}>
           <ListItem button>
             <ListItemIcon>
               <FolderSharedIcon />
             </ListItemIcon>
-            <ListItemText primary={course} />
+            <ListItemText primary={courseInfo.name} />
           </ListItem>
         </Link>
       ))

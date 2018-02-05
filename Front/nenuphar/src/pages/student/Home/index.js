@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-import Doughnut from '../../../components/SkillGraph';
+import {GradeDoughnut} from '../../../components/SkillGraph';
 
 import PersonIcon from 'material-ui-icons/Person';
 
@@ -19,23 +19,22 @@ export default class StudentHome extends Component {
   state = {
     loading: false,
     data: [],
-    colors: ['#2ecc71', '#e74c3c']
   };
 
+
   async componentDidMount () {
-    this.setState({ loading: true });
+
 
     // fetch data here calling a service :
     this.loadRecentSubSkills();
 
     // TDDO update this.state.data:
-    this.setState({ loading: false });
   }
 
    loadRecentSubSkills = async () => {
+    this.setState({ loading: true });
     var recentSubSkills = await getRecentSubSkills();
-    this.setState({ data: recentSubSkills});
-    console.log(this.state.data[0][1]);
+    this.setState({ data: recentSubSkills, loading: false});
   }
 
 
@@ -54,15 +53,7 @@ export default class StudentHome extends Component {
                   return (
                     <Grid item xs={12} sm={6} key={i} style={{color: 'white', textAlign: 'center'}}>
                       <h3 >{this.state.data[i][0]}</h3>
-                      <Doughnut  data={[
-                        {
-                          value: this.state.data[i][1],
-                          color: this.state.colors[0]
-                        }, {
-                          value: 5-this.state.data[i][1],
-                          color: this.state.colors[1]
-                        }
-                      ]} />
+                      <GradeDoughnut  grade={this.state.data[i][1]}/>
                       <h3 >{this.state.data[i][1]+"/5"}</h3>
                     </Grid>
                   );

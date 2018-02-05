@@ -55,5 +55,4 @@ export function setToken(token) {
 
 export function deleToken() {
    localStorage.removeItem(TOKEN_STORAGE_KEY);
-   console.log("deleted Token");
 }

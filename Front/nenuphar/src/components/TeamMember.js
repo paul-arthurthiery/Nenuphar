@@ -6,7 +6,7 @@ import PersonIcon from 'material-ui-icons/Person';
 const TeamMember = (props) => {
   const content = (
     <div>
-      <PersonIcon color="contrast" style={{ height: 72, width: 72 }} />,
+      <PersonIcon color="contrast" style={{ height: 72, width: 72 }} />
       <Typography align="center">{ props.name }</Typography>
     </div>
   );
